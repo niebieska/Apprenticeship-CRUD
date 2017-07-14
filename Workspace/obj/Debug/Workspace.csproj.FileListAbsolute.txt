@@ -1,0 +1,5 @@
+C:\Users\praktykant\Documents\Visual Studio 2008\Projects\Intership-CRUD\Workspace\bin\Debug\Workspace.exe
+C:\Users\praktykant\Documents\Visual Studio 2008\Projects\Intership-CRUD\Workspace\bin\Debug\Workspace.pdb
+C:\Users\praktykant\Documents\Visual Studio 2008\Projects\Intership-CRUD\Workspace\obj\Debug\ResolveAssemblyReference.cache
+C:\Users\praktykant\Documents\Visual Studio 2008\Projects\Intership-CRUD\Workspace\obj\Debug\Workspace.exe
+C:\Users\praktykant\Documents\Visual Studio 2008\Projects\Intership-CRUD\Workspace\obj\Debug\Workspace.pdb

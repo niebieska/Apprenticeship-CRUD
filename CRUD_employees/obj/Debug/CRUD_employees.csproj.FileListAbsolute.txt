@@ -1,0 +1,8 @@
+C:\Users\praktykant\Documents\Visual Studio 2008\Projects\Intership-CRUD\CRUD_employees\bin\Debug\CRUD_employees.exe
+C:\Users\praktykant\Documents\Visual Studio 2008\Projects\Intership-CRUD\CRUD_employees\bin\Debug\CRUD_employees.pdb
+C:\Users\praktykant\Documents\Visual Studio 2008\Projects\Intership-CRUD\CRUD_employees\obj\Debug\ResolveAssemblyReference.cache
+C:\Users\praktykant\Documents\Visual Studio 2008\Projects\Intership-CRUD\CRUD_employees\obj\Debug\CRUD_employees.Properties.Resources.resources
+C:\Users\praktykant\Documents\Visual Studio 2008\Projects\Intership-CRUD\CRUD_employees\obj\Debug\CRUD_employees.csproj.GenerateResource.Cache
+C:\Users\praktykant\Documents\Visual Studio 2008\Projects\Intership-CRUD\CRUD_employees\obj\Debug\CRUD_employees.exe
+C:\Users\praktykant\Documents\Visual Studio 2008\Projects\Intership-CRUD\CRUD_employees\obj\Debug\CRUD_employees.pdb
+C:\Users\praktykant\Documents\Visual Studio 2008\Projects\Intership-CRUD\CRUD_employees\obj\Debug\CRUD_employees.Form1.resources
