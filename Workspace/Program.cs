@@ -17,21 +17,20 @@ namespace Workspace
 
 
             string instance = @"ELPLC-0305\SQLEXPRESS";
-            string dbdir = @"Databases\Employess";
-            string id= @"elPLC-0305\praktykant";
+            string dbdir = "Pracownicy";
+            string id= "sa";
+            string password = "Pr4ktyk4nt1!";
+            Console.WriteLine(password);
 
             Console.WriteLine("Hello world");
             //string cn = "server=SQLEXPRESS;database=Employess";
-            SqlConnection sqlConn = new SqlConnection();
-            sqlConn.ConnectionString = "Data Source=" +
-                instance + ";" + 
-                "Trusted_Connection=yes;" +
-                "database=" + dbdir + "; " +
-                "connection timeout=3";
+            SqlConnection sqlConn = new SqlConnection("Data Source=" + instance + ";"+"User ID=" + id + ";"+"Password="+ password+";" + "Initial Catalog=" + dbdir+";");
 
+            Console.WriteLine(sqlConn.ConnectionString);
+            sw.WriteLine(sqlConn.ConnectionString);
             try
             {
-
+                
                 // otwórz połączenie:
                 sqlConn.Open();
 
@@ -43,7 +42,7 @@ namespace Workspace
             }
             catch (System.Data.SqlClient.SqlException se)
             {
-                string s = " ";
+                
                 Console.WriteLine("Nastąpil bląd połaczenia: " + se);
                 //File.WriteAllText("test.txt", s + se);
                 sw.WriteLine(se);
