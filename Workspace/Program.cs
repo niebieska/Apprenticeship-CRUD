@@ -48,9 +48,17 @@ namespace Workspace
                 // 1. inicjujemy nowe polecenie wraz z zapytaniem i połączeniem
                 SqlCommand cmd = new SqlCommand("select * from dbo.SIEDZIBY", sqlConn);
 
+               //SqlCommand cmd = new SqlCommand("insert into dbo.PRACOWNICY values (@id,@imie,@nazwisko,@data,@ids,@idd)", sqlConn);
+              /* cmd.Parameters.AddWithValue("@id", "1000");
+               cmd.Parameters.AddWithValue("@imie", "Jan");
+               cmd.Parameters.AddWithValue("@nazwisko", "Kowalski");
+               cmd.Parameters.AddWithValue("@data", "2001-01-12");
+               cmd.Parameters.AddWithValue("@ids", "0");
+               cmd.Parameters.AddWithValue("@idd", "0");
+                */
+               // 2. wywołujemy  odczyt Execute dla pozyskania wyników zapytania
+                SqlDataReader rdr = cmd.ExecuteReader();
 
-                // 2. wywołujemy  odczyt Execute dla pozyskania wyników zapytania
-                SqlDataReader rdr = cmd.ExecuteReader(CommandBehavior.SingleRow);
                 while (rdr.Read())
                 {
                     int Id = (int)rdr["id_siedziby"];
@@ -59,7 +67,7 @@ namespace Workspace
                     Console.WriteLine(Id +" "+ Nazwa +" "+ adres + ";");
                 }
 
-                Console.Write(rdr);
+                //Console.Write(rdr);
                 sqlConn.Close();
                 Console.ReadLine();
             }
