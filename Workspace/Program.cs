@@ -11,7 +11,7 @@ namespace Workspace
     class Program
     {
         static void Main(string[] args)
-        {
+        {    //
             StreamWriter sw = new StreamWriter(@"C:\Users\praktykant\Documents\nowyplik.txt", false);
 
 
@@ -23,7 +23,13 @@ namespace Workspace
             Console.WriteLine(password);
 
             Console.WriteLine("Hello world");
-            //string cn = "server=SQLEXPRESS;database=Employess";
+
+            /*Connection String:
+             * zawiera dane serwera SQL, z którym się łączymy:
+             * nazwę instancji - Data Source
+             * dane konta: User ID / Password
+             * Nazwa Bazy Danych
+             */
             SqlConnection sqlConn = new SqlConnection("Data Source=" + instance + ";"+"User ID=" + id + ";"+"Password="+ password+";" + "Initial Catalog=" + dbdir+";");
 
             Console.WriteLine(sqlConn.ConnectionString);
@@ -37,6 +43,23 @@ namespace Workspace
                 Console.WriteLine("Połączono z bazą danych!");
 
                 // zamknij połaczenie:
+                
+               // Console.ReadLine();
+                // 1. inicjujemy nowe polecenie wraz z zapytaniem i połączeniem
+                SqlCommand cmd = new SqlCommand("select * from dbo.SIEDZIBY", sqlConn);
+
+
+                // 2. wywołujemy  odczyt Execute dla pozyskania wyników zapytania
+                SqlDataReader rdr = cmd.ExecuteReader(CommandBehavior.SingleRow);
+                while (rdr.Read())
+                {
+                    int Id = (int)rdr["id_siedziby"];
+                    string Nazwa = (string)rdr["nazwa"];
+                    string adres = (string)rdr["adres"];
+                    Console.WriteLine(Id +" "+ Nazwa +" "+ adres + ";");
+                }
+
+                Console.Write(rdr);
                 sqlConn.Close();
                 Console.ReadLine();
             }
@@ -49,6 +72,9 @@ namespace Workspace
                 sw.Close();
                 Console.ReadLine();
             }
+
+            
+
         }
     }
 }
