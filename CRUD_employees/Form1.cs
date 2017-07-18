@@ -24,6 +24,7 @@ namespace CRUD_employees
         private void button2_Click(object sender, EventArgs e)
         {
             MessageBox.Show("Button Click");
+           
         }
 
         private void button3_Click(object sender, EventArgs e)

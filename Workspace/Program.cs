@@ -37,46 +37,49 @@ namespace Workspace
                 sqlConn.Open();
                 DateTime date=DateTime.Now;
                 Console.WriteLine("Połączono z bazą danych!");
-                
-                SqlCommand cmd = new SqlCommand("insert into dbo.PRACOWNICY values (@id,@imie,@nazwisko,@data,@ids,@idd)", sqlConn);
+                SqlCommand cmd = new SqlCommand("select * from dbo.PRACOWNICY", sqlConn);
+                //SqlCommand cmd = new SqlCommand("delete from dbo.PRACOWNICY where ", sqlConn);
+              /*SqlCommand cmd = new SqlCommand("insert into dbo.PRACOWNICY values (@id,@imie,@nazwisko,@data,@ids,@idd)", sqlConn);
                 cmd.Parameters.AddWithValue("@id", "1");
                 cmd.Parameters.AddWithValue("@imie", "Jan");
                 cmd.Parameters.AddWithValue("@nazwisko", "Kowalski");
                 cmd.Parameters.AddWithValue("@data", date);
                 cmd.Parameters.AddWithValue("@ids", "1");
                 cmd.Parameters.AddWithValue("@idd", "1");
-                // Inicjalizacja nowego polecenia wraz z zapytaniem i połączeniem
-                /*
+                /* Inicjalizacja nowego polecenia wraz z zapytaniem i połączeniem
+               
                 SqlCommand cmd = new SqlCommand("insert into dbo.DZIALY values (@id,@nazwa,@ids)", sqlConn);
                 cmd.Parameters.AddWithValue("@id", 1);
                 cmd.Parameters.AddWithValue("@nazwa", "IT");
                 cmd.Parameters.AddWithValue("@ids", 1);
+                */
+                    
                 
-                    SqlCommand cmd = new SqlCommand("select * from dbo.SIEDZIBY", sqlConn);
-                
-                    Insert do tabeli dbo.STANOWISKA
-                    SqlCommand cmd = new SqlCommand("insert into dbo.STANOWISKA values (@id,@nazwa)",sqlConn);
+                  
+                   /* SqlCommand cmd = new SqlCommand("insert into dbo.STANOWISKA values (@id,@nazwa)",sqlConn);
                     cmd.Parameters.AddWithValue("@id", 1);
                     cmd.Parameters.AddWithValue("@nazwa", "PROGRAMISTA");
-            
-                SqlCommand cmd = new SqlCommand("insert into dbo.PRACOWNICY values (@id,@imie,@nazwisko,@data,@ids,@idd)", sqlConn);
-                cmd.Parameters.AddWithValue("@id", "1000");
-                cmd.Parameters.AddWithValue("@imie", "Jan");
-                cmd.Parameters.AddWithValue("@nazwisko", "Kowalski");
-                cmd.Parameters.AddWithValue("@data", "2001-01-12");
-                cmd.Parameters.AddWithValue("@ids", "1");
-                cmd.Parameters.AddWithValue("@idd", "1");
-                
-              */
+            */
+                              
+             
                // Wywołanie odczytu Execute dla pozyskania wyników zapytania
                 SqlDataReader rdr = cmd.ExecuteReader();
 
                 while (rdr.Read())
                 {
-                    int Id = (int)rdr["id_siedziby"];
+                     int ID = (int)rdr["id_pracownika"];
+                     string imie=(string)rdr["imie"];
+                     string nazwisko = (string)rdr["nazwisko"];
+                     //DateTime 
+                    string data  = Convert.ToDateTime(rdr["data_zatrudnienia"]).ToString("dd/MM/yyyy");
+                     int ids = (int)rdr["id_stanowiska"];
+                     int idd = (int)rdr["id_dzialu"];
+                    
+                    /*int Id = (int)rdr["id_siedziby"];
                     string Nazwa = (string)rdr["nazwa"];
                     string adres = (string)rdr["adres"];
-                    Console.WriteLine(Id +" "+ Nazwa +" "+ adres + ";");
+                    Console.WriteLine(Id +" "+ Nazwa +" "+ adres + ";");*/
+                    Console.WriteLine(ID + imie + nazwisko + data+ids + idd);
                 }
 
                 //Console.Write(rdr);
