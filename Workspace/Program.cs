@@ -37,7 +37,10 @@ namespace Workspace
                 sqlConn.Open();
                 DateTime date=DateTime.Now;
                 Console.WriteLine("Połączono z bazą danych!");
-                SqlCommand cmd = new SqlCommand("select * from dbo.PRACOWNICY", sqlConn);
+                SqlCommand cmd = new SqlCommand();
+                cmd.CommandText = "select p.id_pracownika, p.imie, p.nazwisko,  s.nazwa, d.nazwa_dzialu"+
+                    " from PRACOWNICY p join DZIALY d on p.id_dzialu=d.id_dzialu join STANOWISKA s on p.id_stanowiska=s.id_stanowiska";
+                cmd.Connection = sqlConn;
                 //SqlCommand cmd = new SqlCommand("delete from dbo.PRACOWNICY where ", sqlConn);
               /*SqlCommand cmd = new SqlCommand("insert into dbo.PRACOWNICY values (@id,@imie,@nazwisko,@data,@ids,@idd)", sqlConn);
                 cmd.Parameters.AddWithValue("@id", "1");
@@ -70,16 +73,16 @@ namespace Workspace
                      int ID = (int)rdr["id_pracownika"];
                      string imie=(string)rdr["imie"];
                      string nazwisko = (string)rdr["nazwisko"];
-                     //DateTime 
-                    string data  = Convert.ToDateTime(rdr["data_zatrudnienia"]).ToString("dd/MM/yyyy");
-                     int ids = (int)rdr["id_stanowiska"];
-                     int idd = (int)rdr["id_dzialu"];
+                    // string data  = Convert.ToDateTime(rdr["data_zatrudnienia"]).ToString("dd/MM/yyyy");
+                     string ids = (string)rdr["nazwa"];
+                     string idd = (string)rdr["nazwa_dzialu"];
+                     
                     
                     /*int Id = (int)rdr["id_siedziby"];
                     string Nazwa = (string)rdr["nazwa"];
                     string adres = (string)rdr["adres"];
                     Console.WriteLine(Id +" "+ Nazwa +" "+ adres + ";");*/
-                    Console.WriteLine(ID + imie + nazwisko + data+ids + idd);
+                     Console.WriteLine(ID + " " + imie + " " + nazwisko + " " + ids + " " + idd);//+ data+ids + idd);
                 }
 
                 //Console.Write(rdr);
