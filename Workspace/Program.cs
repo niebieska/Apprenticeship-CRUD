@@ -20,20 +20,20 @@ namespace Workspace
             string dbdir = "Pracownicy";
             string id= "sa";
             string password = "Pr4ktyk4nt1!";
-            Console.WriteLine(password);
+            //Console.WriteLine(password);
 
-            Console.WriteLine("Hello world");
+            //Console.WriteLine("Hello world");
 
             /*Connection String:
              * zawiera dane serwera SQL, z którym się łączymy:
              * nazwę instancji - Data Source
              * dane konta: User ID / Password
-             * Nazwa Bazy Danych
+             * Nazwa Bazy Danych-Initial Catalog
              */
             SqlConnection sqlConn = new SqlConnection("Data Source=" + instance + ";"+"User ID=" + id + ";"+"Password="+ password+";" + "Initial Catalog=" + dbdir+";");
 
-            Console.WriteLine(sqlConn.ConnectionString);
-            sw.WriteLine(sqlConn.ConnectionString);
+            //Console.WriteLine(sqlConn.ConnectionString);
+            //sw.WriteLine(sqlConn.ConnectionString);
             try
             {
                 
@@ -42,20 +42,24 @@ namespace Workspace
 
                 Console.WriteLine("Połączono z bazą danych!");
 
-                // zamknij połaczenie:
+               
                 
                // Console.ReadLine();
                 // 1. inicjujemy nowe polecenie wraz z zapytaniem i połączeniem
-                SqlCommand cmd = new SqlCommand("select * from dbo.SIEDZIBY", sqlConn);
-
-               //SqlCommand cmd = new SqlCommand("insert into dbo.PRACOWNICY values (@id,@imie,@nazwisko,@data,@ids,@idd)", sqlConn);
-              /* cmd.Parameters.AddWithValue("@id", "1000");
-               cmd.Parameters.AddWithValue("@imie", "Jan");
-               cmd.Parameters.AddWithValue("@nazwisko", "Kowalski");
-               cmd.Parameters.AddWithValue("@data", "2001-01-12");
-               cmd.Parameters.AddWithValue("@ids", "0");
-               cmd.Parameters.AddWithValue("@idd", "0");
-                */
+                //SqlCommand cmd = new SqlCommand("select * from dbo.SIEDZIBY", sqlConn);
+                SqlCommand cmd = new SqlCommand("insert into dbo.STANOWISKA values (@id,@nazwa)",sqlConn);
+                cmd.Parameters.AddWithValue("@id", 1);
+                cmd.Parameters.AddWithValue("@nazwa", "PROGRAMISTA");
+             /* 
+              * SqlCommand cmd = new SqlCommand("insert into dbo.PRACOWNICY values (@id,@imie,@nazwisko,@data,@ids,@idd)", sqlConn);
+                cmd.Parameters.AddWithValue("@id", "1000");
+                cmd.Parameters.AddWithValue("@imie", "Jan");
+                cmd.Parameters.AddWithValue("@nazwisko", "Kowalski");
+                cmd.Parameters.AddWithValue("@data", "2001-01-12");
+                cmd.Parameters.AddWithValue("@ids", "0");
+                cmd.Parameters.AddWithValue("@idd", "0");
+                
+              */
                // 2. wywołujemy  odczyt Execute dla pozyskania wyników zapytania
                 SqlDataReader rdr = cmd.ExecuteReader();
 
@@ -68,6 +72,8 @@ namespace Workspace
                 }
 
                 //Console.Write(rdr);
+                
+                // zamknij połaczenie:
                 sqlConn.Close();
                 Console.ReadLine();
             }
