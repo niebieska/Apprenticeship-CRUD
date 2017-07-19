@@ -30,11 +30,13 @@ namespace CRUD_employees
 
         private void button1_Click(object sender, EventArgs e)
         {
-            dataGridView1.ReadOnly = false;
+            Form2 form2 = new Form2();
+            form2.ShowDialog();
+            /*dataGridView1.ReadOnly = false;
             button5.Enabled = true;
             button1.Enabled = false;
             button4.Enabled = false;
-            MessageBox.Show("Button Click");
+            MessageBox.Show("Button Click");*/
         }
 
         private void button2_Click(object sender, EventArgs e)

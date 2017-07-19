@@ -6,3 +6,4 @@ C:\Users\praktykant\Documents\Visual Studio 2008\Projects\Intership-CRUD\CRUD_em
 C:\Users\praktykant\Documents\Visual Studio 2008\Projects\Intership-CRUD\CRUD_employees\obj\Debug\CRUD_employees.exe
 C:\Users\praktykant\Documents\Visual Studio 2008\Projects\Intership-CRUD\CRUD_employees\obj\Debug\CRUD_employees.pdb
 C:\Users\praktykant\Documents\Visual Studio 2008\Projects\Intership-CRUD\CRUD_employees\obj\Debug\CRUD_employees.Form1.resources
+C:\Users\praktykant\Documents\Visual Studio 2008\Projects\Intership-CRUD\CRUD_employees\obj\Debug\CRUD_employees.Form2.resources
