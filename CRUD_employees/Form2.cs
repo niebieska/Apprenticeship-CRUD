@@ -15,5 +15,14 @@ namespace CRUD_employees
         {
             InitializeComponent();
         }
+        private void CountData()
+        { 
+        
+        
+        
+        
+        
+        }
+
     }
 }
