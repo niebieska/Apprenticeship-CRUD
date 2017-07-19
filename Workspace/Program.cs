@@ -38,8 +38,8 @@ namespace Workspace
                 DateTime date=DateTime.Now;
                 Console.WriteLine("Połączono z bazą danych!");
                 SqlCommand cmd = new SqlCommand();
-                cmd.CommandText = "select p.id_pracownika, p.imie, p.nazwisko,  s.nazwa, d.nazwa_dzialu"+
-                    " from PRACOWNICY p join DZIALY d on p.id_dzialu=d.id_dzialu join STANOWISKA s on p.id_stanowiska=s.id_stanowiska";
+                cmd.CommandText = "select p.id_pracownika, p.imie, p.nazwisko,  s.nazwa, d.nazwa_dzialu, si.nazwa_siedziby, si.adres"+
+                    " from PRACOWNICY p join DZIALY d on p.id_dzialu=d.id_dzialu join STANOWISKA s on p.id_stanowiska=s.id_stanowiska join SIEDZIBY si on d.id_siedziby=si.id_siedziby;";
                 cmd.Connection = sqlConn;
                 //SqlCommand cmd = new SqlCommand("delete from dbo.PRACOWNICY where ", sqlConn);
               /*SqlCommand cmd = new SqlCommand("insert into dbo.PRACOWNICY values (@id,@imie,@nazwisko,@data,@ids,@idd)", sqlConn);
@@ -70,19 +70,20 @@ namespace Workspace
 
                 while (rdr.Read())
                 {
-                     int ID = (int)rdr["id_pracownika"];
-                     string imie=(string)rdr["imie"];
-                     string nazwisko = (string)rdr["nazwisko"];
+                    int ID = (int)rdr["id_pracownika"];
+                    string imie=(string)rdr["imie"];
+                    string nazwisko = (string)rdr["nazwisko"];
                     // string data  = Convert.ToDateTime(rdr["data_zatrudnienia"]).ToString("dd/MM/yyyy");
-                     string ids = (string)rdr["nazwa"];
-                     string idd = (string)rdr["nazwa_dzialu"];
-                     
+                    string ids = (string)rdr["nazwa"];
+                    string idd = (string)rdr["nazwa_dzialu"];
+                    string nazwa = (string)rdr["nazwa_siedziby"];
+                    string adres= (string)rdr["adres"];
                     
                     /*int Id = (int)rdr["id_siedziby"];
                     string Nazwa = (string)rdr["nazwa"];
                     string adres = (string)rdr["adres"];
                     Console.WriteLine(Id +" "+ Nazwa +" "+ adres + ";");*/
-                     Console.WriteLine(ID + " " + imie + " " + nazwisko + " " + ids + " " + idd);//+ data+ids + idd);
+                     Console.WriteLine(ID + " " + imie + " " + nazwisko + " " + ids + " " + idd+ " " +nazwa+ " " +adres);//+ data+ids + idd);
                 }
 
                 //Console.Write(rdr);

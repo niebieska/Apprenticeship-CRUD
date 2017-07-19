@@ -1,0 +1,18 @@
+C:\Users\praktykant\AppData\Local\Temporary Projects\Roboczy\obj\Debug\ResolveAssemblyReference.cache
+C:\Users\praktykant\AppData\Local\Temporary Projects\Roboczy\obj\Debug\Roboczy.Form1.resources
+C:\Users\praktykant\AppData\Local\Temporary Projects\Roboczy\obj\Debug\Roboczy.Properties.Resources.resources
+C:\Users\praktykant\AppData\Local\Temporary Projects\Roboczy\obj\Debug\Roboczy.csproj.GenerateResource.Cache
+C:\Users\praktykant\AppData\Local\Temporary Projects\Roboczy\bin\Debug\Roboczy.exe
+C:\Users\praktykant\AppData\Local\Temporary Projects\Roboczy\bin\Debug\Roboczy.pdb
+C:\Users\praktykant\AppData\Local\Temporary Projects\Roboczy\obj\Debug\Roboczy.exe
+C:\Users\praktykant\AppData\Local\Temporary Projects\Roboczy\obj\Debug\Roboczy.pdb
+C:\Users\praktykant\Documents\Visual Studio 2008\Projects\Roboczy\Roboczy\obj\Debug\Roboczy.exe
+C:\Users\praktykant\Documents\Visual Studio 2008\Projects\Roboczy\Roboczy\obj\Debug\Roboczy.pdb
+C:\Users\praktykant\Documents\Visual Studio 2008\Projects\Roboczy\Roboczy\bin\Debug\Roboczy.exe
+C:\Users\praktykant\Documents\Visual Studio 2008\Projects\Roboczy\Roboczy\bin\Debug\Roboczy.pdb
+C:\Users\praktykant\Documents\Visual Studio 2008\Projects\Roboczy\Roboczy\obj\Debug\ResolveAssemblyReference.cache
+C:\Users\praktykant\Documents\Visual Studio 2008\Projects\Roboczy\Roboczy\obj\Debug\Roboczy.Form1.resources
+C:\Users\praktykant\Documents\Visual Studio 2008\Projects\Roboczy\Roboczy\obj\Debug\Roboczy.Properties.Resources.resources
+C:\Users\praktykant\Documents\Visual Studio 2008\Projects\Roboczy\Roboczy\obj\Debug\Roboczy.csproj.GenerateResource.Cache
+C:\Users\praktykant\Documents\Visual Studio 2008\Projects\Intership-CRUD\Roboczy\Roboczy\obj\Debug\Roboczy.exe
+C:\Users\praktykant\Documents\Visual Studio 2008\Projects\Intership-CRUD\Roboczy\Roboczy\obj\Debug\Roboczy.pdb
