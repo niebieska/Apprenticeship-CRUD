@@ -5,7 +5,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CRUD_employees", "CRUD_empl
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Workspace", "Workspace\Workspace.csproj", "{23037A8A-9A98-47E0-8B91-B2AD3A131D16}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Roboczy", "Roboczy\Roboczy\Roboczy.csproj", "{F4825BF0-E9B1-4DAF-9256-39D3951ED313}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Roboczy", "Roboczy\Roboczy.csproj", "{F4825BF0-E9B1-4DAF-9256-39D3951ED313}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
