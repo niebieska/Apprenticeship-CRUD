@@ -25,6 +25,7 @@ namespace CRUD_employees
         {
             InitializeComponent();
         }
+
         private int CountData()
         {
             int iloscrekordow=0;
@@ -223,6 +224,7 @@ namespace CRUD_employees
         {
 
         }
+
 
 }
 
