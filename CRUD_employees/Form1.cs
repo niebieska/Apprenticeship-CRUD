@@ -13,11 +13,11 @@ namespace CRUD_employees
 {
     public partial class Form1 : Form
     {
-       // SqlCommand sCommand;
+        // SqlCommand sCommand;
         SqlDataAdapter dataadapter;
         SqlCommandBuilder databuilder;
         DataSet ds;
-        DataTable sTable;        
+        DataTable sTable;
 
         public Form1()
         {
@@ -25,13 +25,16 @@ namespace CRUD_employees
             dataGridView1.Hide();
             textBox1.Hide();
             button5.Hide();
-            
+
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
+
             Form2 form2 = new Form2();
+            Hide();
             form2.ShowDialog();
+
             /*dataGridView1.ReadOnly = false;
             button5.Enabled = true;
             button1.Enabled = false;
@@ -56,11 +59,11 @@ namespace CRUD_employees
             //AddButtons("Update");
 
 
-           
+
         }
-        private void LoadData()
-        { 
-        StreamWriter sw = new StreamWriter(@"C:\Users\praktykant\Documents\nowyplik.txt", false);
+        public void LoadData()
+        {
+            //StreamWriter sw = new StreamWriter(@"C:\Users\praktykant\Documents\nowyplik.txt", false);
             string instance = @"ELPLC-0305\SQLEXPRESS";
             string dbdir = "Pracownicy";
             string id = "sa";
@@ -85,15 +88,15 @@ namespace CRUD_employees
                 connection.Open();
                 dataadapter.Fill(ds, "Pracownicy");
                 databuilder = new SqlCommandBuilder(dataadapter);
-             
-           // dataadapter.Fill(ds, "Pracownicy");
-            sTable = ds.Tables["Pracownicy"];
-            connection.Close();
-            
-            
-            button5.Enabled = false;
-           
-        
+
+                // dataadapter.Fill(ds, "Pracownicy");
+                sTable = ds.Tables["Pracownicy"];
+                connection.Close();
+
+
+                button5.Enabled = false;
+
+
                 connection.Close();
                 dataGridView1.DataSource = ds;
                 dataGridView1.DataMember = "Pracownicy";
@@ -102,26 +105,28 @@ namespace CRUD_employees
             }
             catch (System.Data.SqlClient.SqlException se)
             {
+                MessageBox.Show("Nastąpil bląd połaczenia: " + se);
+
                 string s = " Wystąpił błąd połączenia z bazą danych ! Uruchom program ponownie!";
                 textBox1.Text = s;
-                sw.WriteLine(se);
-                sw.Close();
+                //sw.WriteLine(se);
+                //sw.Close();
             }
-            
+
         }
 
         private void AddButtons(string name)
         {
             DataGridViewButtonColumn btn = new DataGridViewButtonColumn();
             dataGridView1.Columns.Add(btn);
-            btn.HeaderText = "Click to " + name ;
+            btn.HeaderText = "Click to " + name;
             btn.Text = name;
             btn.Name = "btn";
-            btn.UseColumnTextForButtonValue = true; 
-        
+            btn.UseColumnTextForButtonValue = true;
+
         }
-        
-        
+
+
 
         private void button3_Click(object sender, EventArgs e)
         {
@@ -138,13 +143,13 @@ namespace CRUD_employees
 
             if (e.ColumnIndex == 6)
             {
-                
+
                 // MessageBox.Show((e.RowIndex + 1) + "  Row  " + (e.ColumnIndex + 1) + "  Column button clicked ");
             }
         }
 
         private void button5_Click(object sender, EventArgs e)
-        {   
+        {
             dataadapter.Update(sTable);
             dataGridView1.ReadOnly = true;
             button5.Enabled = false;
