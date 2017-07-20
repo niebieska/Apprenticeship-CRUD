@@ -1,0 +1,8 @@
+C:\Users\praktykant\Documents\Visual Studio 2008\Projects\Intership-CRUD\Roboczy\bin\Release\Roboczy.exe
+C:\Users\praktykant\Documents\Visual Studio 2008\Projects\Intership-CRUD\Roboczy\bin\Release\Roboczy.pdb
+C:\Users\praktykant\Documents\Visual Studio 2008\Projects\Intership-CRUD\Roboczy\obj\Release\ResolveAssemblyReference.cache
+C:\Users\praktykant\Documents\Visual Studio 2008\Projects\Intership-CRUD\Roboczy\obj\Release\Roboczy.Form1.resources
+C:\Users\praktykant\Documents\Visual Studio 2008\Projects\Intership-CRUD\Roboczy\obj\Release\Roboczy.Properties.Resources.resources
+C:\Users\praktykant\Documents\Visual Studio 2008\Projects\Intership-CRUD\Roboczy\obj\Release\Roboczy.csproj.GenerateResource.Cache
+C:\Users\praktykant\Documents\Visual Studio 2008\Projects\Intership-CRUD\Roboczy\obj\Release\Roboczy.exe
+C:\Users\praktykant\Documents\Visual Studio 2008\Projects\Intership-CRUD\Roboczy\obj\Release\Roboczy.pdb

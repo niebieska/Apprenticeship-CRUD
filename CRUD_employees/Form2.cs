@@ -12,15 +12,15 @@ using System.Data.SqlClient;
 namespace CRUD_employees
 {
     public partial class Form2 : Form
-    {         
+    {
+        Form1 form1 = new Form1();  
         string[] dzialy= new string[20];
         string[] stanowiska = new string[20];
         StreamWriter sw = new StreamWriter(@"C:\Users\praktykant\Documents\blad.txt", false);
-
-
         int id_dzialu;
         int id_stanowiska;
         int i = 1, j = 1;
+        
         public Form2()
         {
             InitializeComponent();
@@ -55,10 +55,10 @@ namespace CRUD_employees
             }
             catch (System.Data.SqlClient.SqlException se)
             {
-                
-                sw.WriteLine(se);
-                sw.Close();
-                Console.ReadLine();
+                MessageBox.Show("Nastąpil bląd połaczenia: " + se);
+                //sw.WriteLine(se);
+                //sw.Close();
+                //Console.ReadLine();
                 return 0;
             }
             return iloscrekordow;
@@ -134,9 +134,9 @@ namespace CRUD_employees
             }
             catch (System.Data.SqlClient.SqlException se)
             {
-                MessageBox.Show("Błąd połączenia");
-                sw.WriteLine(se);
-                sw.Close();
+                MessageBox.Show("Nastąpil bląd połaczenia: " + se);
+                //sw.WriteLine(se);
+                //sw.Close();
                 //Console.ReadLine();
             }
         
@@ -162,6 +162,7 @@ namespace CRUD_employees
 
         private void button1_Click(object sender, EventArgs e)
         {
+            int newID = CountData() + 1;
             string imie = textBox1.Text;
             string nazwisko = textBox2.Text;
             DateTime iDate;
@@ -169,7 +170,7 @@ namespace CRUD_employees
             textBox3.Text = imie + nazwisko + iDate + this.comboBox1.GetItemText(this.comboBox1.SelectedItem)+ this.comboBox2.GetItemText(this.comboBox2.SelectedItem);
             string s = " ";
             textBox3.Text = s + CountData();
-            
+
 
             string instance = @"ELPLC-0305\SQLEXPRESS";
             string dbdir = "Pracownicy";
@@ -177,41 +178,35 @@ namespace CRUD_employees
             string password = "Pr4ktyk4nt1!";
 
             SqlConnection sqlConn = new SqlConnection("Data Source=" + instance + ";" + "User ID=" + id + ";" + "Password=" + password + ";" + "Initial Catalog=" + dbdir + ";");
+
             try
             {
                 FindId();
-                string sm = " \n";
-                MessageBox.Show(sm+id_dzialu +sm+id_stanowiska);
+                // otwórz połączenie:
                 sqlConn.Open();
-                MessageBox.Show("jestem tu");
-                SqlCommand cmd = new SqlCommand();
-                cmd.CommandText = "insert into PRACOWNICY" + "VALUES(@id,@imie,@nazwisko,@data,@ids,@idd) ;";
-                cmd.Connection = sqlConn;
-                int IP =(CountData() + 1);
-                /*cmd.Parameters.AddWithValue("@id", IP.ToString());
-                MessageBox.Show(" "+(CountData() + 1));
+                DateTime date = DateTime.Now;
+                MessageBox.Show("Połączono z bazą danych!");
+                SqlCommand cmd = new SqlCommand("insert into dbo.PRACOWNICY values (@id,@imie,@nazwisko,@data,@ids,@idd)", sqlConn);
+                cmd.Parameters.AddWithValue("@id", newID.ToString());
                 cmd.Parameters.AddWithValue("@imie", imie);
                 cmd.Parameters.AddWithValue("@nazwisko", nazwisko);
-                cmd.Parameters.AddWithValue("@data", iDate);
-                cmd.Parameters.AddWithValue("@ids", id_stanowiska);
-                cmd.Parameters.AddWithValue("@idd", id_dzialu);
-                */
-                cmd.Parameters.AddWithValue("@id", '1');
-                cmd.Parameters.AddWithValue("@imie", "JAN");
-                cmd.Parameters.AddWithValue("@nazwisko","Podeszwa");
-                cmd.Parameters.AddWithValue("@data", iDate);
-                cmd.Parameters.AddWithValue("@ids", '1');
-                cmd.Parameters.AddWithValue("@idd", '1');
-                MessageBox.Show("jestem teraz tu na końcu ;)");
+                cmd.Parameters.AddWithValue("@data", iDate.ToString());
+                cmd.Parameters.AddWithValue("@ids", id_stanowiska.ToString());
+                cmd.Parameters.AddWithValue("@idd", id_dzialu.ToString());
+                SqlDataReader rdr = cmd.ExecuteReader();
                 sqlConn.Close();
+
             }
             catch (System.Data.SqlClient.SqlException se)
             {
-                MessageBox.Show("Błąd połączenia");
-                sw.WriteLine(se);
-                sw.Close();
-               // Console.ReadLine();
-                
+
+
+                MessageBox.Show("Nastąpil bląd połaczenia: " + se);
+
+                //sw.WriteLine(se);
+                //sw.Close();
+                Console.ReadLine();
+
             }
             
 
@@ -227,6 +222,9 @@ namespace CRUD_employees
 
         private void button2_Click(object sender, EventArgs e)
         {
+            Close();
+            form1.Show();
+            form1.Refresh();
 
         }
 
