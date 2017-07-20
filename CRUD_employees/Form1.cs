@@ -25,7 +25,9 @@ namespace CRUD_employees
             dataGridView1.Hide();
             textBox1.Hide();
             button5.Hide();
-
+            button1.Hide();
+            button3.Hide();
+            button4.Hide();
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -42,25 +44,7 @@ namespace CRUD_employees
             MessageBox.Show("Button Click");*/
         }
 
-        private void button2_Click(object sender, EventArgs e)
-        {
-            //button1.Dispose();
-            //button3.Dispose();
-            button2.Dispose();
-            //button4.Dispose();
-            pictureBox1.Dispose();
-            label1.Dispose();
-            //MessageBox.Show("Button Click");
-            textBox1.Show();
-            dataGridView1.Show();
-            button5.Show();
-            LoadData();
-            //AddButtons("Delete");
-            //AddButtons("Update");
-
-
-
-        }
+       
         public void LoadData()
         {
             //StreamWriter sw = new StreamWriter(@"C:\Users\praktykant\Documents\nowyplik.txt", false);
@@ -155,6 +139,26 @@ namespace CRUD_employees
             button5.Enabled = false;
             button1.Enabled = true;
             button4.Enabled = true;
+        }
+
+        private void button9_Click(object sender, EventArgs e)
+        {
+            //button1.Dispose();
+            //button3.Dispose();
+           
+            //button4.Dispose();
+            pictureBox1.Dispose();
+            label1.Dispose();
+            //MessageBox.Show("Button Click");
+            textBox1.Show();
+            dataGridView1.Show();
+            button5.Show();
+            button1.Show();
+            button3.Show();
+            button4.Show();
+            LoadData();
+            //AddButtons("Delete");
+            //AddButtons("Update");
         }
     }
 }
