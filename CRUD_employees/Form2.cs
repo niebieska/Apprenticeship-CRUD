@@ -16,7 +16,7 @@ namespace CRUD_employees
         Form1 form1 = new Form1();  
         string[] dzialy= new string[20];
         string[] stanowiska = new string[20];
-        StreamWriter sw = new StreamWriter(@"C:\Users\praktykant\Documents\blad.txt", false);
+       // StreamWriter sw = new StreamWriter(@"C:\Users\praktykant\Documents\blad.txt", false);
         int id_dzialu;
         int id_stanowiska;
         int i = 1, j = 1;
@@ -223,7 +223,7 @@ namespace CRUD_employees
         private void button2_Click(object sender, EventArgs e)
         {
             Close();
-            form1.Show();
+            //form1.Show();
             form1.Refresh();
 
         }

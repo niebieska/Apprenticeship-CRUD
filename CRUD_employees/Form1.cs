@@ -34,7 +34,9 @@ namespace CRUD_employees
         {
 
             Form2 form2 = new Form2();
-            Hide();
+            SendToBack();
+
+            //Hide();
             form2.ShowDialog();
 
             /*dataGridView1.ReadOnly = false;
