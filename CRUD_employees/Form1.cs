@@ -34,10 +34,13 @@ namespace CRUD_employees
         {
 
             Form2 form2 = new Form2();
+          
             SendToBack();
-
-            //Hide();
+             
+            
             form2.ShowDialog();
+           
+
 
             /*dataGridView1.ReadOnly = false;
             button5.Enabled = true;
@@ -116,13 +119,63 @@ namespace CRUD_employees
 
         private void button3_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("Button Click");
+            //if(dataGridView1.SelectedRows[0].Index==true)
+            button5.Enabled = true;
+            button1.Enabled = false;
+            button4.Enabled = true;
+            dataGridView1.ReadOnly = false;
+            MessageBox.Show("Wlaczono edycje");
         }
+        private void Delete() 
+        {
+            MessageBox.Show("Usuwanie");
+            string instance = @"ELPLC-0305\SQLEXPRESS";
+            string dbdir = "Pracownicy";
+            string id = "sa";
+            string password = "Pr4ktyk4nt1!";
 
+
+            SqlConnection sqlConn = new SqlConnection("Data Source=" + instance + ";" + "User ID=" + id + ";" + "Password=" + password + ";" + "Initial Catalog=" + dbdir + ";");
+
+            try
+            {
+                MessageBox.Show("Connected");
+                sqlConn.Open();
+                DateTime date = DateTime.Now;
+                Console.WriteLine("Połączono z bazą danych!");
+               int condition=dataGridView1.SelectedRows[0].Index+1 ;
+               MessageBox.Show(condition.ToString());
+                SqlCommand cmd = new SqlCommand("DELETE FROM dbo.PRACOWNICY where id_pracownika='" + condition + "';", sqlConn);
+
+                SqlDataReader rdr = cmd.ExecuteReader();
+                sqlConn.Close();
+                MessageBox.Show("finished");
+                //Console.ReadLine();
+            }
+            catch (System.Data.SqlClient.SqlException se)
+            {
+
+                MessageBox.Show("Nastąpil bląd połaczenia: " + se);
+
+              
+            }
+        
+        
+        }
         private void button4_Click(object sender, EventArgs e)
         {
             MessageBox.Show("Button Click");
-            dataGridView1.ReadOnly=false;
+            DialogResult dr = MessageBox.Show("Czy na pewno chcesz usunac wybrany  rekord?", 
+                      "Mood Test", MessageBoxButtons.YesNo);
+            switch (dr)
+            {
+                case DialogResult.Yes: Delete(); break;
+                case DialogResult.No: break;
+            }
+            string data;
+            data = dataGridView1.SelectedRows.ToString();
+            int index = dataGridView1.SelectedRows[0].Index;
+           
             
             
         }
@@ -141,9 +194,7 @@ namespace CRUD_employees
         {
             dataadapter.Update(sTable);
             dataGridView1.ReadOnly = true;
-            button5.Enabled = false;
-            button1.Enabled = true;
-            button4.Enabled = true;
+            
         }
 
         private void button9_Click(object sender, EventArgs e)
@@ -162,11 +213,19 @@ namespace CRUD_employees
             button3.Show();
             button4.Show();
             LoadData();
+            button5.Enabled = false;
+            button1.Enabled = true;
+            button4.Enabled = false;
             //AddButtons("Delete");
             //AddButtons("Update");
         }
 
         private void textBox1_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button6_Click(object sender, EventArgs e)
         {
 
         }

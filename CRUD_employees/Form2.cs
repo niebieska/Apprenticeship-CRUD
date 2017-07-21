@@ -199,37 +199,25 @@ namespace CRUD_employees
             }
             catch (System.Data.SqlClient.SqlException se)
             {
-
-
                 MessageBox.Show("Nastąpil bląd połaczenia: " + se);
-
                 //sw.WriteLine(se);
                 //sw.Close();
                 Console.ReadLine();
-
             }
-            
-
-
-
-
         }
 
         private void textBox3_TextChanged(object sender, EventArgs e)
-        {
-
-        }
+        {}
 
         private void button2_Click(object sender, EventArgs e)
         {
-            Close();
-            //form1.Show();
-            form1.Refresh();
 
+            //form1.Refresh(); 
+            
+            form1.LoadData();
+             Close();
         }
-
-
-}
-
+        
+    }
     }
 
