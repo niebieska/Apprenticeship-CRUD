@@ -39,13 +39,13 @@ namespace CRUD_employees
             {    //Wyłuskanie nazw stanowisk
                 sqlConn.Open();
                 SqlCommand cmd = new SqlCommand();
-                cmd.CommandText = "select count(id_pracownika)" + " from PRACOWNICY;";
+                cmd.CommandText = "SELECT  id_pracownika FROM PRACOWNICY  where id_pracownika > (SELECT  count(id_pracownika) as ilosc FROM PRACOWNICY);";
                 cmd.Connection = sqlConn;
                 SqlDataReader rdr = cmd.ExecuteReader();
 
                 while (rdr.Read())
                 {
-                    iloscrekordow = (int)rdr[""];
+                    iloscrekordow = (int)rdr["id_pracownika"];
                     return iloscrekordow;
                 }
                 sqlConn.Close();
