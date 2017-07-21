@@ -120,16 +120,19 @@ namespace CRUD_employees
         private void button4_Click(object sender, EventArgs e)
         {
             MessageBox.Show("Button Click");
+            dataGridView1.ReadOnly=false;
+            
+            
         }
 
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
-
-            if (e.ColumnIndex == 6)
-            {
-
-                // MessageBox.Show((e.RowIndex + 1) + "  Row  " + (e.ColumnIndex + 1) + "  Column button clicked ");
-            }
+            string data;
+            //MessageBox.Show( 
+            data = dataGridView1.SelectedRows.ToString();
+            int index = dataGridView1.SelectedRows[0].Index;
+            textBox1.Text = index.ToString();  
+           
         }
 
         private void button5_Click(object sender, EventArgs e)
@@ -159,6 +162,11 @@ namespace CRUD_employees
             LoadData();
             //AddButtons("Delete");
             //AddButtons("Update");
+        }
+
+        private void textBox1_TextChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }

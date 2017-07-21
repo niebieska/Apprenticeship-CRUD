@@ -42,13 +42,13 @@ namespace Workspace
                     " from PRACOWNICY p ;";
                 cmd.Connection = sqlConn;*/
                 //SqlCommand cmd = new SqlCommand("delete from dbo.PRACOWNICY where ", sqlConn);
-                SqlCommand cmd = new SqlCommand("insert into dbo.PRACOWNICY values (@id,@imie,@nazwisko,@data,@ids,@idd)", sqlConn);
-                cmd.Parameters.AddWithValue("@id", "7");
+                SqlCommand cmd = new SqlCommand("DELETE FROM dbo.PRACOWNICY;", sqlConn);
+               /* cmd.Parameters.AddWithValue("@id", "22");
                 cmd.Parameters.AddWithValue("@imie", "Julian");
                 cmd.Parameters.AddWithValue("@nazwisko", "Król");
                 cmd.Parameters.AddWithValue("@data", date);
                 cmd.Parameters.AddWithValue("@ids", "1");
-                cmd.Parameters.AddWithValue("@idd", "1");
+                cmd.Parameters.AddWithValue("@idd", "1");*/
                 /* Inicjalizacja nowego polecenia wraz z zapytaniem i połączeniem
                
                 SqlCommand cmd = new SqlCommand("insert into dbo.DZIALY values (@id,@nazwa,@ids)", sqlConn);
