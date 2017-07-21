@@ -43,7 +43,7 @@ namespace Workspace
                 cmd.Connection = sqlConn;*/
                 int condition = 2;
                 //SqlCommand cmd = new SqlCommand("delete from dbo.PRACOWNICY where ", sqlConn);
-                SqlCommand cmd = new SqlCommand("DELETE FROM dbo.PRACOWNICY where id_pracownika='"+condition+"';", sqlConn);
+                SqlCommand cmd = new SqlCommand("DELETE FROM dbo.PRACOWNICY;", sqlConn);
                 //cmd.Parameters.AddWithValue("@condition", "2");
                 /* cmd.Parameters.AddWithValue("@imie", "Julian");
                  cmd.Parameters.AddWithValue("@nazwisko", "Król");

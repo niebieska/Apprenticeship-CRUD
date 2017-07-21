@@ -13,6 +13,9 @@ namespace CRUD_employees
 {
     public partial class Form1 : Form
     {
+        int[] IDs = new int[50];
+        int i = 0;
+
         // SqlCommand sCommand;
         SqlDataAdapter dataadapter;
         SqlCommandBuilder databuilder;
@@ -143,7 +146,8 @@ namespace CRUD_employees
                 sqlConn.Open();
                 DateTime date = DateTime.Now;
                 Console.WriteLine("Połączono z bazą danych!");
-               int condition=dataGridView1.SelectedRows[0].Index+1 ;
+                ListofEmployees();
+                int condition = IDs[dataGridView1.SelectedRows[0].Index];
                MessageBox.Show(condition.ToString());
                 SqlCommand cmd = new SqlCommand("DELETE FROM dbo.PRACOWNICY where id_pracownika='" + condition + "';", sqlConn);
 
@@ -161,6 +165,40 @@ namespace CRUD_employees
             }
         
         
+        }
+
+        private void ListofEmployees()
+        { string instance = @"ELPLC-0305\SQLEXPRESS";
+            string dbdir = "Pracownicy";
+            string id= "sa";
+            string password = "Pr4ktyk4nt1!";
+            
+            SqlConnection sqlConn = new SqlConnection("Data Source=" + instance + ";"+"User ID=" + id + ";"+"Password="+ password+";" + "Initial Catalog=" + dbdir+";");
+
+            try
+            {
+                sqlConn.Open();
+                DateTime date = DateTime.Now;
+                Console.WriteLine("Połączono z bazą danych!");
+                SqlCommand cmd = new SqlCommand();
+                cmd.CommandText = "select p.id_pracownika, p.imie, p.nazwisko,  s.nazwa, d.nazwa_dzialu" +
+                    " from PRACOWNICY p join DZIALY d on p.id_dzialu=d.id_dzialu join STANOWISKA s on p.id_stanowiska=s.id_stanowiska";
+                cmd.Connection = sqlConn;
+                SqlDataReader rdr = cmd.ExecuteReader();
+
+                while (rdr.Read())
+                {
+                    IDs[i] = (int)rdr["id_pracownika"]; i++;
+                }
+                sqlConn.Close();
+                Console.ReadLine();
+            }
+            catch (System.Data.SqlClient.SqlException se)
+            {
+                MessageBox.Show("Nastąpil bląd połaczenia: " + se);
+            }
+
+
         }
         private void button4_Click(object sender, EventArgs e)
         {
