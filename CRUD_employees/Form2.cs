@@ -40,7 +40,7 @@ namespace CRUD_employees
             {    //Wyłuskanie nazw stanowisk
                 sqlConn.Open();
                 SqlCommand cmd = new SqlCommand();
-                cmd.CommandText = "SELECT  id_pracownika FROM PRACOWNICY  where id_pracownika > (SELECT  count(id_pracownika) as ilosc FROM PRACOWNICY);";
+                cmd.CommandText = "SELECT  max(id_pracownika) as ilosc FROM PRACOWNICY;";
                 cmd.Connection = sqlConn;
                 SqlDataReader rdr = cmd.ExecuteReader();
 
@@ -61,7 +61,7 @@ namespace CRUD_employees
 
                     while (rdr.Read())
                     {
-                        iloscrekordow = (int)rdr["ilosc"];
+                        iloscrekordow = (int)rdr["id_pracownika"];
                         return iloscrekordow;
                     }
                     sqlConn.Close();
