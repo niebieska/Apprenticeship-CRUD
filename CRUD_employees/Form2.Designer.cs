@@ -214,7 +214,7 @@
             this.button3.BackColor = System.Drawing.Color.Khaki;
             this.button3.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button3.ForeColor = System.Drawing.Color.Orange;
-            this.button3.Location = new System.Drawing.Point(420, 258);
+            this.button3.Location = new System.Drawing.Point(309, 350);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(95, 23);
             this.button3.TabIndex = 4;

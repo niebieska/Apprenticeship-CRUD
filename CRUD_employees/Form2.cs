@@ -25,7 +25,7 @@ namespace CRUD_employees
             InitializeComponent();
             textBox3.Text = s;
             button3.Hide();
-            if (s.Length > 1) { LoadDataForEdit(); button3.Show(); }
+            if (s.Length > 1) { LoadDataForEdit(); button3.Show(); DeleteDataforEdit(); }
         }
 
         private void LoadDataForEdit() 
@@ -66,8 +66,41 @@ namespace CRUD_employees
                 MessageBox.Show("Nastąpil bląd połaczenia: " + se);
             }
         }
+        private void DeleteDataforEdit() 
+        {
+            MessageBox.Show("Usuwanie");
+            string instance = @"ELPLC-0305\SQLEXPRESS";
+            string dbdir = "Pracownicy";
+            string id = "sa";
+            string password = "Pr4ktyk4nt1!";
+            SqlConnection sqlConn = new SqlConnection("Data Source=" + instance + ";" + "User ID=" + id + ";" + "Password=" + password + ";" + "Initial Catalog=" + dbdir + ";");
+            string index = textBox3.Text;
+            try
+            {
+                MessageBox.Show("Connected");
+                sqlConn.Open();
+                DateTime date = DateTime.Now;
+                Console.WriteLine("Połączono z bazą danych!");
+
+
+                SqlCommand cmd = new SqlCommand("DELETE FROM dbo.PRACOWNICY where id_pracownika='" + index + "';", sqlConn);
+
+                SqlDataReader rdr = cmd.ExecuteReader();
+                sqlConn.Close();
+                MessageBox.Show("finished");
+            }
+
+            catch (System.Data.SqlClient.SqlException se)
+            {
+                MessageBox.Show("Nastąpil bląd połaczenia: " + se);
+            }
+        
+        
+        
+        }
         private int CountData()
         {
+            string s;
             int iloscrekordow=0;
             string instance = @"ELPLC-0305\SQLEXPRESS";
             string dbdir = "Pracownicy";
@@ -85,10 +118,13 @@ namespace CRUD_employees
 
                 while (rdr.Read())
                 {
+                    if (rdr["ilosc"] == DBNull.Value) { return 0; break; };
+                    //MessageBox.Show(s);
                     iloscrekordow = (int)rdr["ilosc"];
                     return iloscrekordow;
                 }
                 sqlConn.Close();
+                if (iloscrekordow == 0) { return 0; }
             }
                             
             catch (System.Data.SqlClient.SqlException se)
@@ -188,20 +224,13 @@ namespace CRUD_employees
             }        
         
         }
-
-        private void button1_Click(object sender, EventArgs e)
+        private void InsertDataToEmployees(string EID) 
         {
-            int newID = CountData() + 1;
-            MessageBox.Show(newID.ToString());
             string imie = textBox1.Text;
             string nazwisko = textBox2.Text;
             DateTime iDate;
             iDate = dateTimePicker1.Value;
-            textBox3.Text = imie + nazwisko + iDate + this.comboBox1.GetItemText(this.comboBox1.SelectedItem)+ this.comboBox2.GetItemText(this.comboBox2.SelectedItem);
-            string s = " ";
-            textBox3.Text = s + CountData();
-
-
+            textBox3.Text = imie + nazwisko + iDate + this.comboBox1.GetItemText(this.comboBox1.SelectedItem) + this.comboBox2.GetItemText(this.comboBox2.SelectedItem);
             string instance = @"ELPLC-0305\SQLEXPRESS";
             string dbdir = "Pracownicy";
             string id = "sa";
@@ -217,7 +246,7 @@ namespace CRUD_employees
                 DateTime date = DateTime.Now;
                 MessageBox.Show("Połączono z bazą danych!");
                 SqlCommand cmd = new SqlCommand("insert into dbo.PRACOWNICY values (@id,@imie,@nazwisko,@data,@ids,@idd)", sqlConn);
-                cmd.Parameters.AddWithValue("@id", newID.ToString());
+                cmd.Parameters.AddWithValue("@id", EID);
                 cmd.Parameters.AddWithValue("@imie", imie);
                 cmd.Parameters.AddWithValue("@nazwisko", nazwisko);
                 cmd.Parameters.AddWithValue("@data", iDate.ToString());
@@ -234,6 +263,13 @@ namespace CRUD_employees
                 //sw.Close();
                 Console.ReadLine();
             }
+        
+        
+        }
+        private void button1_Click(object sender, EventArgs e)
+        {
+            int newID = CountData() + 1;
+            InsertDataToEmployees(newID.ToString());
             button1.Enabled = false;
         }
 
@@ -251,32 +287,8 @@ namespace CRUD_employees
 
         private void button3_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("Usuwanie");
-            string instance = @"ELPLC-0305\SQLEXPRESS";
-            string dbdir = "Pracownicy";
-            string id = "sa";
-            string password = "Pr4ktyk4nt1!";
-            SqlConnection sqlConn = new SqlConnection("Data Source=" + instance + ";" + "User ID=" + id + ";" + "Password=" + password + ";" + "Initial Catalog=" + dbdir + ";");
-
-            try
-            {
-                MessageBox.Show("Connected");
-                sqlConn.Open();
-                DateTime date = DateTime.Now;
-                Console.WriteLine("Połączono z bazą danych!");
-
-                string index = textBox3.Text; 
-                SqlCommand cmd = new SqlCommand("DELETE FROM dbo.PRACOWNICY where id_pracownika='"+ index +"';", sqlConn);
-
-                SqlDataReader rdr = cmd.ExecuteReader();
-                sqlConn.Close();
-                MessageBox.Show("finished");
-            }
-
-            catch (System.Data.SqlClient.SqlException se)
-            {
-                MessageBox.Show("Nastąpil bląd połaczenia: " + se);
-            }
+            string index = textBox3.Text;
+            
         }
         
     }
