@@ -183,7 +183,7 @@ namespace CRUD_employees
             
             ListofEmployees();
             WybranyPracownik=IDs[dataGridView1.SelectedRows[0].Index];
-            Form2 form2 = new Form2(WybranyPracownik.ToString());
+            Form2 form2 = new Form2(WybranyPracownik + " ");
             MessageBox.Show(WybranyPracownik.ToString());
             form2.Show();
         }

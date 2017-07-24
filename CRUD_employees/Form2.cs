@@ -23,9 +23,49 @@ namespace CRUD_employees
         public Form2(string s)
         {
             InitializeComponent();
-            textBox1.Text = s;
+            textBox3.Text = s;
+            button3.Hide();
+            if (s.Length > 1) { LoadDataForEdit(); button3.Show(); }
         }
 
+        private void LoadDataForEdit() 
+        {
+            string instance = @"ELPLC-0305\SQLEXPRESS";
+            string dbdir = "Pracownicy";
+            string id = "sa";
+            string password = "Pr4ktyk4nt1!";
+            
+            string index = textBox3.Text;
+
+            SqlConnection connection = new SqlConnection("Data Source=" + instance + ";" + "User ID=" + id + ";" + "Password=" + password + ";" + "Initial Catalog=" + dbdir + ";");
+
+            SqlCommand cmd = new SqlCommand("select p.id_pracownika as ID, p.imie as Imie, p.nazwisko as Nazwisko, p.data_zatrudnienia,  s.nazwa as Stanowisko, d.nazwa_dzialu as 'Nazwa działu', si.nazwa_siedziby as Siedziba, si.adres as Adres" +
+                    " from PRACOWNICY p join DZIALY d on p.id_dzialu=d.id_dzialu join STANOWISKA s on p.id_stanowiska=s.id_stanowiska join SIEDZIBY si on d.id_siedziby=si.id_siedziby where id_pracownika=" + index + ";", connection);
+
+
+            try
+            {
+                connection.Open();
+                SqlDataReader rdr = cmd.ExecuteReader();
+                while (rdr.Read())
+                {
+                    textBox1.Text = (string)rdr["imie"];
+                    textBox2.Text = (string)rdr["nazwisko"];
+
+                    dateTimePicker1.Value = Convert.ToDateTime(rdr["data_zatrudnienia"]);
+                    comboBox1.Text = (string)rdr["Stanowisko"];
+                    comboBox2.Text = (string)rdr["Nazwa działu"];
+                    comboBox3.Text = (string)rdr["Siedziba"];
+
+                }
+                connection.Close();
+
+            }
+            catch (System.Data.SqlClient.SqlException se)
+            {
+                MessageBox.Show("Nastąpil bląd połaczenia: " + se);
+            }
+        }
         private int CountData()
         {
             int iloscrekordow=0;
@@ -211,48 +251,32 @@ namespace CRUD_employees
 
         private void button3_Click(object sender, EventArgs e)
         {
-          
+            MessageBox.Show("Usuwanie");
             string instance = @"ELPLC-0305\SQLEXPRESS";
             string dbdir = "Pracownicy";
             string id = "sa";
             string password = "Pr4ktyk4nt1!";
-            DateTime date = new DateTime();
-
-            string index = textBox1.Text;
-            
-            SqlConnection connection = new SqlConnection("Data Source=" + instance + ";" + "User ID=" + id + ";" + "Password=" + password + ";" + "Initial Catalog=" + dbdir + ";");
-
-            SqlCommand cmd = new SqlCommand("select p.id_pracownika as ID, p.imie as Imie, p.nazwisko as Nazwisko, p.data_zatrudnienia,  s.nazwa as Stanowisko, d.nazwa_dzialu as 'Nazwa działu', si.nazwa_siedziby as Siedziba, si.adres as Adres" +
-                    " from PRACOWNICY p join DZIALY d on p.id_dzialu=d.id_dzialu join STANOWISKA s on p.id_stanowiska=s.id_stanowiska join SIEDZIBY si on d.id_siedziby=si.id_siedziby where id_pracownika=" + index + ";", connection);
-
+            SqlConnection sqlConn = new SqlConnection("Data Source=" + instance + ";" + "User ID=" + id + ";" + "Password=" + password + ";" + "Initial Catalog=" + dbdir + ";");
 
             try
             {
-                connection.Open();
+                MessageBox.Show("Connected");
+                sqlConn.Open();
+                DateTime date = DateTime.Now;
+                Console.WriteLine("Połączono z bazą danych!");
+
+                string index = textBox3.Text; 
+                SqlCommand cmd = new SqlCommand("DELETE FROM dbo.PRACOWNICY where id_pracownika='"+ index +"';", sqlConn);
+
                 SqlDataReader rdr = cmd.ExecuteReader();
-                while (rdr.Read())
-                {
-                    textBox1.Text=(string)rdr["imie"];
-                    textBox2.Text = (string)rdr["nazwisko"];
-
-                    dateTimePicker1.Value = Convert.ToDateTime(rdr["data_zatrudnienia"]);
-                    comboBox1.Text = (string)rdr["Stanowisko"];
-                    comboBox2.Text = (string)rdr["Nazwa działu"];
-                    comboBox3.Text = (string)rdr["Siedziba"];
-
-                }
-                connection.Close();
-
+                sqlConn.Close();
+                MessageBox.Show("finished");
             }
+
             catch (System.Data.SqlClient.SqlException se)
             {
                 MessageBox.Show("Nastąpil bląd połaczenia: " + se);
             }
-
-
-
-
-
         }
         
     }

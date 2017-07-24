@@ -178,13 +178,15 @@
             // 
             // button1
             // 
+            this.button1.BackColor = System.Drawing.Color.LightSteelBlue;
             this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button1.ForeColor = System.Drawing.SystemColors.HotTrack;
             this.button1.Location = new System.Drawing.Point(420, 258);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(95, 23);
             this.button1.TabIndex = 1;
             this.button1.Text = "Zapisz";
-            this.button1.UseVisualStyleBackColor = true;
+            this.button1.UseVisualStyleBackColor = false;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // textBox3
@@ -198,6 +200,7 @@
             // button2
             // 
             this.button2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button2.ForeColor = System.Drawing.Color.RoyalBlue;
             this.button2.Location = new System.Drawing.Point(420, 288);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(95, 23);
@@ -208,9 +211,10 @@
             // 
             // button3
             // 
-            this.button3.BackColor = System.Drawing.Color.PeachPuff;
+            this.button3.BackColor = System.Drawing.Color.Khaki;
             this.button3.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button3.Location = new System.Drawing.Point(420, 352);
+            this.button3.ForeColor = System.Drawing.Color.Orange;
+            this.button3.Location = new System.Drawing.Point(420, 258);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(95, 23);
             this.button3.TabIndex = 4;
