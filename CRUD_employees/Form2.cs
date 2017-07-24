@@ -25,7 +25,12 @@ namespace CRUD_employees
             InitializeComponent();
             textBox3.Text = s;
             button3.Hide();
-            if (s.Length > 1) { LoadDataForEdit(); button3.Show(); DeleteDataforEdit(); }
+            if (s.Length > 1) 
+            { 
+                LoadDataForEdit();
+                button3.Show(); 
+                //DeleteDataforEdit(); 
+            }
         }
 
         private void LoadDataForEdit() 
@@ -288,7 +293,33 @@ namespace CRUD_employees
         private void button3_Click(object sender, EventArgs e)
         {
             string index = textBox3.Text;
-            
+            string imie = textBox1.Text;
+            string nazwisko = textBox2.Text;
+            DateTime iDate;
+            iDate = dateTimePicker1.Value;
+
+            string instance = @"ELPLC-0305\SQLEXPRESS";
+            string dbdir = "Pracownicy";
+            string id = "sa";
+            string password = "Pr4ktyk4nt1!";
+
+            SqlConnection sqlConn = new SqlConnection("Data Source=" + instance + ";" + "User ID=" + id + ";" + "Password=" + password + ";" + "Initial Catalog=" + dbdir + ";");
+
+            try
+            {
+                sqlConn.Open();
+
+                MessageBox.Show("Połączono z bazą danych!");
+                SqlCommand cmd = new SqlCommand("Update dbo.PRACOWNICY set imie='" +textBox3.Text +"'where id_pracownika='"+ index+"';",sqlConn);
+                SqlDataReader rdr = cmd.ExecuteReader();
+                sqlConn.Close();
+
+            }
+            catch (System.Data.SqlClient.SqlException se)
+            {
+                MessageBox.Show("Nastąpil bląd połaczenia: " + se);
+
+            }
         }
         
     }
