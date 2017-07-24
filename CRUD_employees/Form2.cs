@@ -21,9 +21,10 @@ namespace CRUD_employees
         int id_stanowiska;
         int i = 1, j = 1;
         
-        public Form2()
+        public Form2(string s)
         {
             InitializeComponent();
+            textBox1.Text = s;
         }
 
         private int CountData()
@@ -49,8 +50,22 @@ namespace CRUD_employees
                     return iloscrekordow;
                 }
                 sqlConn.Close();
-               
 
+                if (iloscrekordow == 0) 
+                {
+                    sqlConn.Open();
+                    cmd = new SqlCommand();
+                    cmd.CommandText = "SELECT  count(id_pracownika) as ilosc FROM PRACOWNICY;";
+                    cmd.Connection = sqlConn;
+                    rdr = cmd.ExecuteReader();
+
+                    while (rdr.Read())
+                    {
+                        iloscrekordow = (int)rdr["ilosc"];
+                        return iloscrekordow;
+                    }
+                    sqlConn.Close();
+                }
 
             }
             catch (System.Data.SqlClient.SqlException se)
@@ -163,6 +178,7 @@ namespace CRUD_employees
         private void button1_Click(object sender, EventArgs e)
         {
             int newID = CountData() + 1;
+            MessageBox.Show(newID.ToString());
             string imie = textBox1.Text;
             string nazwisko = textBox2.Text;
             DateTime iDate;
@@ -204,6 +220,7 @@ namespace CRUD_employees
                 //sw.Close();
                 Console.ReadLine();
             }
+            button1.Enabled = false;
         }
 
         private void textBox3_TextChanged(object sender, EventArgs e)
@@ -216,6 +233,52 @@ namespace CRUD_employees
             
             form1.LoadData();
              Close();
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+          
+            string instance = @"ELPLC-0305\SQLEXPRESS";
+            string dbdir = "Pracownicy";
+            string id = "sa";
+            string password = "Pr4ktyk4nt1!";
+            DateTime date = new DateTime();
+
+            string index = textBox1.Text;
+            
+            SqlConnection connection = new SqlConnection("Data Source=" + instance + ";" + "User ID=" + id + ";" + "Password=" + password + ";" + "Initial Catalog=" + dbdir + ";");
+
+            SqlCommand cmd = new SqlCommand("select p.id_pracownika as ID, p.imie as Imie, p.nazwisko as Nazwisko, p.data_zatrudnienia,  s.nazwa as Stanowisko, d.nazwa_dzialu as 'Nazwa działu', si.nazwa_siedziby as Siedziba, si.adres as Adres" +
+                    " from PRACOWNICY p join DZIALY d on p.id_dzialu=d.id_dzialu join STANOWISKA s on p.id_stanowiska=s.id_stanowiska join SIEDZIBY si on d.id_siedziby=si.id_siedziby where id_pracownika=" + index + ";", connection);
+
+
+            try
+            {
+                connection.Open();
+                SqlDataReader rdr = cmd.ExecuteReader();
+                while (rdr.Read())
+                {
+                    textBox1.Text=(string)rdr["imie"];
+                    textBox2.Text = (string)rdr["nazwisko"];
+
+                    dateTimePicker1.Value = Convert.ToDateTime(rdr["data_zatrudnienia"]);
+                    comboBox1.Text = (string)rdr["Stanowisko"];
+                    comboBox2.Text = (string)rdr["Nazwa działu"];
+                    comboBox3.Text = (string)rdr["Siedziba"];
+
+                }
+                connection.Close();
+
+            }
+            catch (System.Data.SqlClient.SqlException se)
+            {
+                MessageBox.Show("Nastąpil bląd połaczenia: " + se);
+            }
+
+
+
+
+
         }
         
     }

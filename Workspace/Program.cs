@@ -41,7 +41,7 @@ namespace Workspace
                 cmd.CommandText = "select COUNT(p.id_pracownika)"+
                     " from PRACOWNICY p ;";
                 cmd.Connection = sqlConn;*/
-                int condition = 2;
+                //int condition = 2;
                 //SqlCommand cmd = new SqlCommand("delete from dbo.PRACOWNICY where ", sqlConn);
                 SqlCommand cmd = new SqlCommand("DELETE FROM dbo.PRACOWNICY;", sqlConn);
                 //cmd.Parameters.AddWithValue("@condition", "2");
