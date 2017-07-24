@@ -16,7 +16,6 @@ namespace CRUD_employees
         Form1 form1 = new Form1();  
         string[] dzialy= new string[20];
         string[] stanowiska = new string[20];
-       // StreamWriter sw = new StreamWriter(@"C:\Users\praktykant\Documents\blad.txt", false);
         int id_dzialu;
         int id_stanowiska;
         int i = 1, j = 1;
@@ -37,7 +36,7 @@ namespace CRUD_employees
 
             SqlConnection sqlConn = new SqlConnection("Data Source=" + instance + ";" + "User ID=" + id + ";" + "Password=" + password + ";" + "Initial Catalog=" + dbdir + ";");
             try
-            {    //Wyłuskanie nazw stanowisk
+            {   
                 sqlConn.Open();
                 SqlCommand cmd = new SqlCommand();
                 cmd.CommandText = "SELECT  max(id_pracownika) as ilosc FROM PRACOWNICY;";
@@ -46,47 +45,22 @@ namespace CRUD_employees
 
                 while (rdr.Read())
                 {
-                    iloscrekordow = (int)rdr["id_pracownika"];
+                    iloscrekordow = (int)rdr["ilosc"];
                     return iloscrekordow;
                 }
                 sqlConn.Close();
-
-                if (iloscrekordow == 0) 
-                {
-                    sqlConn.Open();
-                    cmd = new SqlCommand();
-                    cmd.CommandText = "SELECT  count(id_pracownika) as ilosc FROM PRACOWNICY;";
-                    cmd.Connection = sqlConn;
-                    rdr = cmd.ExecuteReader();
-
-                    while (rdr.Read())
-                    {
-                        iloscrekordow = (int)rdr["id_pracownika"];
-                        return iloscrekordow;
-                    }
-                    sqlConn.Close();
-                }
-
             }
+                            
             catch (System.Data.SqlClient.SqlException se)
             {
                 MessageBox.Show("Nastąpil bląd połaczenia: " + se);
-                //sw.WriteLine(se);
-                //sw.Close();
-                //Console.ReadLine();
                 return 0;
             }
             return iloscrekordow;
-     
-        
-        
-        
         }
-
+        
         private void Form2_Load(object sender, EventArgs e)
         {
-            
-                   
             string instance = @"ELPLC-0305\SQLEXPRESS";
             string dbdir = "Pracownicy";
             string id = "sa";
