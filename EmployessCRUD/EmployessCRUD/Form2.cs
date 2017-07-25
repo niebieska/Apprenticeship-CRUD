@@ -96,7 +96,7 @@ namespace EmployessCRUD
                 while (rdr.Read())
                 {
                     string Name= (string)rdr["nazwa"];
-                    JobTitles.Insert(J,Name); J++;
+                    //JobTitles.Insert(J,Name,); J++;
                     JobTitlecomboBox.Items.Add(Name);
                 }
                 sqlConn.Close();
