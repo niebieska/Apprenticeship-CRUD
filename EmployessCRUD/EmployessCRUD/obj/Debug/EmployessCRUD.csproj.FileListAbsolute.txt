@@ -1,0 +1,17 @@
+C:\Users\praktykant\AppData\Local\Temporary Projects\EmployessCRUD\bin\Debug\EmployessCRUD.exe
+C:\Users\praktykant\AppData\Local\Temporary Projects\EmployessCRUD\bin\Debug\EmployessCRUD.pdb
+C:\Users\praktykant\AppData\Local\Temporary Projects\EmployessCRUD\obj\Debug\ResolveAssemblyReference.cache
+C:\Users\praktykant\AppData\Local\Temporary Projects\EmployessCRUD\obj\Debug\EmployessCRUD.Properties.Resources.resources
+C:\Users\praktykant\AppData\Local\Temporary Projects\EmployessCRUD\obj\Debug\EmployessCRUD.csproj.GenerateResource.Cache
+C:\Users\praktykant\AppData\Local\Temporary Projects\EmployessCRUD\obj\Debug\EmployessCRUD.exe
+C:\Users\praktykant\AppData\Local\Temporary Projects\EmployessCRUD\obj\Debug\EmployessCRUD.pdb
+C:\Users\praktykant\AppData\Local\Temporary Projects\EmployessCRUD\obj\Debug\EmployessCRUD.Form1.resources
+C:\Users\praktykant\Documents\Visual Studio 2008\Projects\EmployessCRUD\EmployessCRUD\obj\Debug\EmployessCRUD.exe
+C:\Users\praktykant\Documents\Visual Studio 2008\Projects\EmployessCRUD\EmployessCRUD\obj\Debug\EmployessCRUD.pdb
+C:\Users\praktykant\Documents\Visual Studio 2008\Projects\EmployessCRUD\EmployessCRUD\bin\Debug\EmployessCRUD.exe
+C:\Users\praktykant\Documents\Visual Studio 2008\Projects\EmployessCRUD\EmployessCRUD\bin\Debug\EmployessCRUD.pdb
+C:\Users\praktykant\Documents\Visual Studio 2008\Projects\EmployessCRUD\EmployessCRUD\obj\Debug\ResolveAssemblyReference.cache
+C:\Users\praktykant\Documents\Visual Studio 2008\Projects\EmployessCRUD\EmployessCRUD\obj\Debug\EmployessCRUD.Form1.resources
+C:\Users\praktykant\Documents\Visual Studio 2008\Projects\EmployessCRUD\EmployessCRUD\obj\Debug\EmployessCRUD.Properties.Resources.resources
+C:\Users\praktykant\Documents\Visual Studio 2008\Projects\EmployessCRUD\EmployessCRUD\obj\Debug\EmployessCRUD.csproj.GenerateResource.Cache
+C:\Users\praktykant\Documents\Visual Studio 2008\Projects\EmployessCRUD\EmployessCRUD\obj\Debug\EmployessCRUD.AddForm.resources
