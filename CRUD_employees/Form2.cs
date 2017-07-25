@@ -105,7 +105,7 @@ namespace CRUD_employees
         }
         private int CountData()
         {
-            string s;
+           
             int iloscrekordow=0;
             string instance = @"ELPLC-0305\SQLEXPRESS";
             string dbdir = "Pracownicy";
@@ -123,7 +123,7 @@ namespace CRUD_employees
 
                 while (rdr.Read())
                 {
-                    if (rdr["ilosc"] == DBNull.Value) { return 0; break; };
+                    if (rdr["ilosc"] == DBNull.Value) { return 0;  };
                     //MessageBox.Show(s);
                     iloscrekordow = (int)rdr["ilosc"];
                     return iloscrekordow;
@@ -302,7 +302,7 @@ namespace CRUD_employees
             string dbdir = "Pracownicy";
             string id = "sa";
             string password = "Pr4ktyk4nt1!";
-
+            FindId();
             SqlConnection sqlConn = new SqlConnection("Data Source=" + instance + ";" + "User ID=" + id + ";" + "Password=" + password + ";" + "Initial Catalog=" + dbdir + ";");
 
             try
@@ -310,10 +310,15 @@ namespace CRUD_employees
                 sqlConn.Open();
 
                 MessageBox.Show("Połączono z bazą danych!");
-                SqlCommand cmd = new SqlCommand("Update dbo.PRACOWNICY set imie='" +textBox3.Text +"'where id_pracownika='"+ index+"';",sqlConn);
+                MessageBox.Show(id_stanowiska.ToString());
+                SqlCommand cmd = new SqlCommand("Update dbo.PRACOWNICY set imie=@im,nazwisko=@nazw,data_zatrudnienia =@date, id_stanowiska=@ids,id_dzialu=@idd where id_pracownika=@IDE", sqlConn);
+                cmd.Parameters.AddWithValue("@im", textBox1.Text);
+                cmd.Parameters.AddWithValue("@nazw", textBox2.Text);
+                cmd.Parameters.AddWithValue("@date", dateTimePicker1.Value.ToString());
+                cmd.Parameters.AddWithValue("@ids", id_stanowiska.ToString());
+                cmd.Parameters.AddWithValue("@idd", id_dzialu.ToString());
+                cmd.Parameters.AddWithValue("@IDE", textBox3.Text);
                 SqlDataReader rdr = cmd.ExecuteReader();
-                sqlConn.Close();
-
             }
             catch (System.Data.SqlClient.SqlException se)
             {
