@@ -29,7 +29,6 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(AddForm));
-            this.helpProvider1 = new System.Windows.Forms.HelpProvider();
             this.NametextBox = new System.Windows.Forms.TextBox();
             this.SurnametextBox = new System.Windows.Forms.TextBox();
             this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
@@ -40,32 +39,32 @@
             this.SaveBtn = new System.Windows.Forms.Button();
             this.ExitBtn = new System.Windows.Forms.Button();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
-            this.label1 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
-            this.label4 = new System.Windows.Forms.Label();
-            this.label5 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
+            this.label5 = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
             this.tableLayoutPanel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // NametextBox
             // 
-            this.NametextBox.Location = new System.Drawing.Point(106, 3);
+            this.NametextBox.Location = new System.Drawing.Point(107, 3);
             this.NametextBox.Name = "NametextBox";
             this.NametextBox.Size = new System.Drawing.Size(186, 20);
             this.NametextBox.TabIndex = 6;
             // 
             // SurnametextBox
             // 
-            this.SurnametextBox.Location = new System.Drawing.Point(106, 30);
+            this.SurnametextBox.Location = new System.Drawing.Point(107, 30);
             this.SurnametextBox.Name = "SurnametextBox";
             this.SurnametextBox.Size = new System.Drawing.Size(186, 20);
             this.SurnametextBox.TabIndex = 7;
             // 
             // dateTimePicker1
             // 
-            this.dateTimePicker1.Location = new System.Drawing.Point(106, 65);
+            this.dateTimePicker1.Location = new System.Drawing.Point(107, 65);
             this.dateTimePicker1.Name = "dateTimePicker1";
             this.dateTimePicker1.Size = new System.Drawing.Size(186, 20);
             this.dateTimePicker1.TabIndex = 8;
@@ -80,7 +79,7 @@
             // JobTitlecomboBox
             // 
             this.JobTitlecomboBox.FormattingEnabled = true;
-            this.JobTitlecomboBox.Location = new System.Drawing.Point(106, 103);
+            this.JobTitlecomboBox.Location = new System.Drawing.Point(107, 103);
             this.JobTitlecomboBox.Name = "JobTitlecomboBox";
             this.JobTitlecomboBox.Size = new System.Drawing.Size(186, 21);
             this.JobTitlecomboBox.TabIndex = 9;
@@ -88,7 +87,7 @@
             // OfficecomboBox
             // 
             this.OfficecomboBox.FormattingEnabled = true;
-            this.OfficecomboBox.Location = new System.Drawing.Point(106, 133);
+            this.OfficecomboBox.Location = new System.Drawing.Point(107, 133);
             this.OfficecomboBox.Name = "OfficecomboBox";
             this.OfficecomboBox.Size = new System.Drawing.Size(186, 21);
             this.OfficecomboBox.TabIndex = 10;
@@ -96,7 +95,7 @@
             // DepartmentcomboBox
             // 
             this.DepartmentcomboBox.FormattingEnabled = true;
-            this.DepartmentcomboBox.Location = new System.Drawing.Point(106, 166);
+            this.DepartmentcomboBox.Location = new System.Drawing.Point(107, 166);
             this.DepartmentcomboBox.Name = "DepartmentcomboBox";
             this.DepartmentcomboBox.Size = new System.Drawing.Size(186, 21);
             this.DepartmentcomboBox.TabIndex = 11;
@@ -112,6 +111,7 @@
             this.SaveBtn.TabIndex = 6;
             this.SaveBtn.Text = "Zapisz";
             this.SaveBtn.UseVisualStyleBackColor = true;
+            this.SaveBtn.Click += new System.EventHandler(this.SaveBtn_Click);
             // 
             // ExitBtn
             // 
@@ -124,6 +124,7 @@
             this.ExitBtn.TabIndex = 7;
             this.ExitBtn.Text = "Wróć";
             this.ExitBtn.UseVisualStyleBackColor = true;
+            this.ExitBtn.Click += new System.EventHandler(this.ExitBtn_Click);
             // 
             // tableLayoutPanel1
             // 
@@ -154,14 +155,14 @@
             this.tableLayoutPanel1.Size = new System.Drawing.Size(299, 195);
             this.tableLayoutPanel1.TabIndex = 12;
             // 
-            // label1
+            // label3
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(3, 0);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(29, 13);
-            this.label1.TabIndex = 13;
-            this.label1.Text = "Imie:";
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(3, 163);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(35, 13);
+            this.label3.TabIndex = 18;
+            this.label3.Text = "Dział:";
             // 
             // label2
             // 
@@ -172,23 +173,23 @@
             this.label2.TabIndex = 14;
             this.label2.Text = "Nazwisko:";
             // 
-            // label3
+            // label1
             // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(3, 163);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(35, 13);
-            this.label3.TabIndex = 18;
-            this.label3.Text = "Dział:";
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(3, 0);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(29, 13);
+            this.label1.TabIndex = 13;
+            this.label1.Text = "Imie:";
             // 
-            // label4
+            // label6
             // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(3, 130);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(47, 13);
-            this.label4.TabIndex = 17;
-            this.label4.Text = "Oddział:";
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(3, 62);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(93, 13);
+            this.label6.TabIndex = 15;
+            this.label6.Text = "Data zatrudnienia:";
             // 
             // label5
             // 
@@ -199,14 +200,14 @@
             this.label5.TabIndex = 16;
             this.label5.Text = "Stanowisko:";
             // 
-            // label6
+            // label4
             // 
-            this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(3, 62);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(93, 13);
-            this.label6.TabIndex = 15;
-            this.label6.Text = "Data zatrudnienia:";
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(3, 130);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(47, 13);
+            this.label4.TabIndex = 17;
+            this.label4.Text = "Oddział:";
             // 
             // AddForm
             // 
@@ -230,7 +231,6 @@
 
         #endregion
 
-        private System.Windows.Forms.HelpProvider helpProvider1;
         private System.Windows.Forms.TextBox NametextBox;
         private System.Windows.Forms.TextBox SurnametextBox;
         private System.Windows.Forms.DateTimePicker dateTimePicker1;

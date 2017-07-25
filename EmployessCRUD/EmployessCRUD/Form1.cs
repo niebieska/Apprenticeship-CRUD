@@ -117,6 +117,11 @@ namespace EmployessCRUD
                 MessageBox.Show("Nastąpil bląd połaczenia: " + se);
             }
         }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+
+        }
         
         
 

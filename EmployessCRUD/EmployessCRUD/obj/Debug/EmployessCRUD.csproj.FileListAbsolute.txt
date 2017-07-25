@@ -15,3 +15,12 @@ C:\Users\praktykant\Documents\Visual Studio 2008\Projects\EmployessCRUD\Employes
 C:\Users\praktykant\Documents\Visual Studio 2008\Projects\EmployessCRUD\EmployessCRUD\obj\Debug\EmployessCRUD.Properties.Resources.resources
 C:\Users\praktykant\Documents\Visual Studio 2008\Projects\EmployessCRUD\EmployessCRUD\obj\Debug\EmployessCRUD.csproj.GenerateResource.Cache
 C:\Users\praktykant\Documents\Visual Studio 2008\Projects\EmployessCRUD\EmployessCRUD\obj\Debug\EmployessCRUD.AddForm.resources
+C:\Users\praktykant\Documents\Visual Studio 2008\Projects\Intership-CRUD\EmployessCRUD\EmployessCRUD\obj\Debug\ResolveAssemblyReference.cache
+C:\Users\praktykant\Documents\Visual Studio 2008\Projects\Intership-CRUD\EmployessCRUD\EmployessCRUD\obj\Debug\EmployessCRUD.Form1.resources
+C:\Users\praktykant\Documents\Visual Studio 2008\Projects\Intership-CRUD\EmployessCRUD\EmployessCRUD\obj\Debug\EmployessCRUD.AddForm.resources
+C:\Users\praktykant\Documents\Visual Studio 2008\Projects\Intership-CRUD\EmployessCRUD\EmployessCRUD\obj\Debug\EmployessCRUD.Properties.Resources.resources
+C:\Users\praktykant\Documents\Visual Studio 2008\Projects\Intership-CRUD\EmployessCRUD\EmployessCRUD\obj\Debug\EmployessCRUD.csproj.GenerateResource.Cache
+C:\Users\praktykant\Documents\Visual Studio 2008\Projects\Intership-CRUD\EmployessCRUD\EmployessCRUD\obj\Debug\EmployessCRUD.exe
+C:\Users\praktykant\Documents\Visual Studio 2008\Projects\Intership-CRUD\EmployessCRUD\EmployessCRUD\bin\Debug\EmployessCRUD.exe
+C:\Users\praktykant\Documents\Visual Studio 2008\Projects\Intership-CRUD\EmployessCRUD\EmployessCRUD\bin\Debug\EmployessCRUD.pdb
+C:\Users\praktykant\Documents\Visual Studio 2008\Projects\Intership-CRUD\EmployessCRUD\EmployessCRUD\obj\Debug\EmployessCRUD.pdb
