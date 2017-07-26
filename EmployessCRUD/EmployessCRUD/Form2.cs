@@ -31,14 +31,11 @@ namespace EmployessCRUD
             {
                 HelptextBox.Text = s;
                 LoadDataForEdit();
-
-            }
-            
+            }            
         }
 
         private void SaveBtn_Click(object sender, EventArgs e)
         {
-            
             if (HelptextBox.Text.Length < 1)
             {
                 int ID = CountData() + 1;
@@ -47,12 +44,10 @@ namespace EmployessCRUD
             }
             else
             {
-                
-                UpdateData(); 
-                 SaveBtn.Enabled = false; 
-                }
-                            
-            
+                UpdateData();
+                SaveBtn.Enabled = false;
+            }                       
+        
         }
         
 
@@ -65,7 +60,6 @@ namespace EmployessCRUD
         {
             ComboBoxPreparation();
         }
-
 
         private int CountData() 
         {
@@ -99,6 +93,7 @@ namespace EmployessCRUD
             }
             return iloscrekordow;
         }
+       
         private void ComboBoxPreparation()
         { 
             string instance = @"ELPLC-0305\SQLEXPRESS";
@@ -109,7 +104,7 @@ namespace EmployessCRUD
             SqlConnection sqlConn = new SqlConnection("Data Source=" + instance + ";" + "User ID=" + id + ";" + "Password=" + password + ";" + "Initial Catalog=" + dbdir + ";");
 
             try
-            {    //Wyłuskanie nazw stanowisk
+            {    
                 sqlConn.Open();
                 SqlCommand cmd = new SqlCommand();
                 cmd.CommandText = "select id_stanowiska,nazwa" + " from STANOWISKA;";
@@ -137,14 +132,10 @@ namespace EmployessCRUD
 					OfficecomboBox.Items.Add(Nazwa);
                 }
                 sqlConn.Close();
-
-               
-            }
-                     
+            }        
             catch (System.Data.SqlClient.SqlException se)
             {
-                MessageBox.Show("Nastąpil bląd połaczenia: " + se);
-                
+                MessageBox.Show("Nastąpil bląd połaczenia: " + se);               
             }
         }
         
@@ -180,12 +171,10 @@ namespace EmployessCRUD
             catch (System.Data.SqlClient.SqlException se)
             {
                 MessageBox.Show("Nastąpil bląd połaczenia: Oddzialy " + se);
-
             }
         }
-               
-         
-     private void InsertDataToEmployees(string ID) 
+        
+        private void InsertDataToEmployees(string ID) 
         {
             string instance = @"ELPLC-0305\SQLEXPRESS";
             string dbdir = "Pracownicy";
@@ -196,9 +185,7 @@ namespace EmployessCRUD
             SqlConnection sqlConn = new SqlConnection("Data Source=" + instance + ";" + "User ID=" + id + ";" + "Password=" + password + ";" + "Initial Catalog=" + dbdir + ";");
             try
             {
-                // otwórz połączenie:
                 sqlConn.Open();
-                //MessageBox.Show("Połączono z bazą danych!");
                 SqlCommand cmd = new SqlCommand("insert into dbo.PRACOWNICY values (@id,@imie,@nazwisko,@data,@ids,@idd)", sqlConn);
                 cmd.Parameters.AddWithValue("@id", ID);
                 cmd.Parameters.AddWithValue("@imie", NametextBox.Text);
@@ -208,37 +195,34 @@ namespace EmployessCRUD
                 cmd.Parameters.AddWithValue("@idd", DepartmentId.ToString());
                 SqlDataReader rdr = cmd.ExecuteReader();
                 sqlConn.Close();
-
             }
             catch (System.Data.SqlClient.SqlException se)
             {
                 MessageBox.Show("Nastąpil bląd połaczenia: " + se);
                 Console.ReadLine();
             }
-     }
-     private void FindId() 
-     { 
-       while(J<50)
-       {
-           if (this.JobTitlecomboBox.GetItemText(this.JobTitlecomboBox.SelectedItem) == JobTitles[J])
-           {
-               JobTitleId = J; break;
-           }
+        }
+        private void FindId() 
+        { 
+            while(J<50)
+            {
+                if (this.JobTitlecomboBox.GetItemText(this.JobTitlecomboBox.SelectedItem) == JobTitles[J])
+                {
+                    JobTitleId = J; break;
+                }
+           
            J++;
-       
-       }
-     
-     while(D<50)
-       {
-           if (this.DepartmentcomboBox.GetItemText(this.DepartmentcomboBox .SelectedItem) == Departments[D])
-           {
-               DepartmentId = D; break;
-           }
-           D++;
-        
-       }
-     
-     }
+            }
+            while(D<50)
+            {
+                if (this.DepartmentcomboBox.GetItemText(this.DepartmentcomboBox.SelectedItem) == Departments[D])
+                { 
+                    DepartmentId = D; break; 
+                }
+             D++;
+            }
+        }
+
      private void LoadDataForEdit()
      {
          string instance = @"ELPLC-0305\SQLEXPRESS";
@@ -252,8 +236,6 @@ namespace EmployessCRUD
 
          SqlCommand cmd = new SqlCommand("select p.id_pracownika as ID, p.imie as Imie, p.nazwisko as Nazwisko, p.data_zatrudnienia,s.id_stanowiska ,  s.nazwa as Stanowisko, d.id_dzialu,d.nazwa_dzialu as 'Nazwa działu', si.nazwa_siedziby as Siedziba, si.adres as Adres" +
                  " from PRACOWNICY p join DZIALY d on p.id_dzialu=d.id_dzialu join STANOWISKA s on p.id_stanowiska=s.id_stanowiska join SIEDZIBY si on d.id_siedziby=si.id_siedziby where id_pracownika=" + index + ";", connection);
-
-
          try
          {
              connection.Open();
@@ -290,8 +272,6 @@ namespace EmployessCRUD
          
          FindId();
 
-         
-
          if (JobTitleId == 0) { id_stanowiska = OldJobTitleId; }
          else { id_stanowiska = JobTitleId; }
         
@@ -301,15 +281,11 @@ namespace EmployessCRUD
              id_dzialu = DepartmentId; 
          }
          
-
          SqlConnection sqlConn = new SqlConnection("Data Source=" + instance + ";" + "User ID=" + id + ";" + "Password=" + password + ";" + "Initial Catalog=" + dbdir + ";");
 
          try
          {
              sqlConn.Open();
-
-             //MessageBox.Show("Połączono z bazą danych!");
-            // MessageBox.Show(id_stanowiska.ToString());
              SqlCommand cmd = new SqlCommand("Update dbo.PRACOWNICY set imie=@im,nazwisko=@nazw,data_zatrudnienia =@date, id_stanowiska=@ids,id_dzialu=@idd where id_pracownika=@IDE", sqlConn);
              cmd.Parameters.AddWithValue("@im", NametextBox.Text);
              cmd.Parameters.AddWithValue("@nazw", SurnametextBox.Text);
@@ -322,21 +298,12 @@ namespace EmployessCRUD
          catch (System.Data.SqlClient.SqlException se)
          {
              MessageBox.Show("Nastąpil bląd połaczenia: " + se);
-
          }
-
-
-
-
      }
 
      private void DepartmentcomboBox_SelectedIndexChanged(object sender, EventArgs e)
-     {}
-
-          
+     {}        
         
-        } 
-
-        
+        }       
     }
 

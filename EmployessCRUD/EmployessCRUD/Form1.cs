@@ -21,10 +21,7 @@ namespace EmployessCRUD
         DataTable sTable;
         int[] IDs = new int[50]; //tablica z numerami ID pracowników
         int i = 0;
-        
-       
-
-
+ 
         public Form1()
         {
             InitializeComponent();
@@ -37,8 +34,6 @@ namespace EmployessCRUD
             TurnOnEditBth.Hide();
             TurnOffEditBth.Hide();
             SqldataGridView.ReadOnly = false;
-
-
         }
 
         private void EmployeesBtn_Click(object sender, EventArgs e)
@@ -63,7 +58,6 @@ namespace EmployessCRUD
             DeleteBtn.Enabled = true;
             TurnOnEditBth.Hide();
             TurnOffEditBth.Show();
-
         }
 
         private void TurnOffEditBth_Click(object sender, EventArgs e)
@@ -84,8 +78,6 @@ namespace EmployessCRUD
             aform.ShowDialog();
             LoadDataToSqldataGridView("Pracownicy", sql);
             EmployeesBtn.Enabled = false;
-           
-
         }
 
         private void UpdateBtn_Click(object sender, EventArgs e)
@@ -98,11 +90,9 @@ namespace EmployessCRUD
             {
                 IsClicked = false;
                 AddForm aform= new AddForm( " "+IDs[SqldataGridView.SelectedRows[0].Index]);
-                aform.ShowDialog();
-                       
+                aform.ShowDialog();                      
             }
             LoadDataToSqldataGridView("Pracownicy", sql);
-
         }
 
         private void DeleteBtn_Click(object sender, EventArgs e)
@@ -129,7 +119,6 @@ namespace EmployessCRUD
 
         private void LoadDataToSqldataGridView(string TableName, string sql) 
         {
-            //MessageBox.Show("Data Loading ...");
             string instance = @"ELPLC-0305\SQLEXPRESS";
             string dbdir = "Pracownicy";
             string id = "sa";
@@ -160,9 +149,7 @@ namespace EmployessCRUD
         }
 
         private void Form1_Load(object sender, EventArgs e)
-        {
-
-        }
+        {}
         private void ListofEmployees()
         {
             string instance = @"ELPLC-0305\SQLEXPRESS";
@@ -192,8 +179,7 @@ namespace EmployessCRUD
             catch (System.Data.SqlClient.SqlException se)
             {
                 MessageBox.Show("Nastąpil bląd połaczenia: " + se);
-            }
-        
+            }      
         
         }
 
