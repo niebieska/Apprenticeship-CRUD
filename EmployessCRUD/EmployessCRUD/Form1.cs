@@ -21,7 +21,7 @@ namespace EmployessCRUD
         DataTable sTable;
         int[] IDs = new int[50]; //tablica z numerami ID pracowników
         int i = 0;
-        int ChoosenEmployee = 0;
+        
        
 
 
@@ -90,6 +90,8 @@ namespace EmployessCRUD
 
         private void UpdateBtn_Click(object sender, EventArgs e)
         {
+            string sql = "select p.id_pracownika as ID, p.imie as Imie, p.nazwisko as Nazwisko,  s.nazwa as Stanowisko, d.nazwa_dzialu as 'Nazwa działu', si.nazwa_siedziby as Siedziba, si.adres as Adres" +
+                         " from PRACOWNICY p join DZIALY d on p.id_dzialu=d.id_dzialu join STANOWISKA s on p.id_stanowiska=s.id_stanowiska join SIEDZIBY si on d.id_siedziby=si.id_siedziby;";
             ListofEmployees();
             if (IsClicked == false) { MessageBox.Show("Nie wybrano Pracownika !"); }
             else
@@ -97,9 +99,9 @@ namespace EmployessCRUD
                 IsClicked = false;
                 AddForm aform= new AddForm( " "+IDs[SqldataGridView.SelectedRows[0].Index]);
                 aform.ShowDialog();
-            
-            
+                       
             }
+            LoadDataToSqldataGridView("Pracownicy", sql);
 
         }
 
@@ -119,8 +121,7 @@ namespace EmployessCRUD
                 switch (dr)
                 {
                     case DialogResult.Yes: Delete(IDE);
-                        LoadDataToSqldataGridView("Pracownicy", sql);
-                         MessageBox.Show("After Delete"); break;
+                        LoadDataToSqldataGridView("Pracownicy", sql); break;
                     case DialogResult.No: break;
                 }
             }

@@ -100,6 +100,7 @@
             this.DepartmentcomboBox.Name = "DepartmentcomboBox";
             this.DepartmentcomboBox.Size = new System.Drawing.Size(186, 21);
             this.DepartmentcomboBox.TabIndex = 11;
+            this.DepartmentcomboBox.SelectedIndexChanged += new System.EventHandler(this.DepartmentcomboBox_SelectedIndexChanged);
             // 
             // SaveBtn
             // 
