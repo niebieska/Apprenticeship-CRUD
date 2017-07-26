@@ -42,6 +42,7 @@ namespace EmployessCRUD
         {
             form1.Refresh();
             Close();
+            
         }
         private void AddForm_Load(object sender, EventArgs e)
         {

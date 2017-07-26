@@ -18,6 +18,8 @@ namespace EmployessCRUD
         SqlCommandBuilder databuilder;
         DataSet ds;
         DataTable sTable;
+        int[] IDs = new int[50]; //tablica z numerami ID pracowników
+        int i = 0;
        
 
 
@@ -75,7 +77,13 @@ namespace EmployessCRUD
         private void CreateBtn_Click(object sender, EventArgs e)
         {
             AddForm aform = new AddForm();
+            string sql = "select p.id_pracownika as ID, p.imie as Imie, p.nazwisko as Nazwisko,  s.nazwa as Stanowisko, d.nazwa_dzialu as 'Nazwa działu', si.nazwa_siedziby as Siedziba, si.adres as Adres" +
+                   " from PRACOWNICY p join DZIALY d on p.id_dzialu=d.id_dzialu join STANOWISKA s on p.id_stanowiska=s.id_stanowiska join SIEDZIBY si on d.id_siedziby=si.id_siedziby;";
             aform.ShowDialog();
+            LoadDataToSqldataGridView("Pracownicy", sql);
+            EmployeesBtn.Enabled = false;
+           
+
         }
 
         private void UpdateBtn_Click(object sender, EventArgs e)
@@ -85,6 +93,17 @@ namespace EmployessCRUD
 
         private void DeleteBtn_Click(object sender, EventArgs e)
         {
+            DialogResult dr = MessageBox.Show("Czy na pewno chcesz usunac wybrany  rekord?",
+                     "Usuwanie", MessageBoxButtons.YesNo);
+            string sql = "select p.id_pracownika as ID, p.imie as Imie, p.nazwisko as Nazwisko,  s.nazwa as Stanowisko, d.nazwa_dzialu as 'Nazwa działu', si.nazwa_siedziby as Siedziba, si.adres as Adres" +
+                     " from PRACOWNICY p join DZIALY d on p.id_dzialu=d.id_dzialu join STANOWISKA s on p.id_stanowiska=s.id_stanowiska join SIEDZIBY si on d.id_siedziby=si.id_siedziby;";
+            switch (dr)
+            {
+                case DialogResult.Yes: Delete(); 
+                    LoadDataToSqldataGridView("Pracownicy", sql);
+                    EmployeesBtn.Enabled = false; break;
+                case DialogResult.No: break;
+            }
 
         }
 
@@ -123,7 +142,70 @@ namespace EmployessCRUD
         {
 
         }
+        private void ListofEmployees()
+        {
+            string instance = @"ELPLC-0305\SQLEXPRESS";
+            string dbdir = "Pracownicy";
+            string id = "sa";
+            string password = "Pr4ktyk4nt1!";
+            SqlConnection sqlConn = new SqlConnection("Data Source=" + instance + ";" + "User ID=" + id + ";" + "Password=" + password + ";" + "Initial Catalog=" + dbdir + ";");
+
+            try
+            {
+                sqlConn.Open();
+                DateTime date = DateTime.Now;
+                Console.WriteLine("Połączono z bazą danych!");
+                SqlCommand cmd = new SqlCommand();
+                cmd.CommandText = "select p.id_pracownika, p.imie, p.nazwisko,  s.nazwa, d.nazwa_dzialu" +
+                    " from PRACOWNICY p join DZIALY d on p.id_dzialu=d.id_dzialu join STANOWISKA s on p.id_stanowiska=s.id_stanowiska";
+                cmd.Connection = sqlConn;
+                SqlDataReader rdr = cmd.ExecuteReader();
+
+                while (rdr.Read())
+                {
+                    IDs[i] = (int)rdr["id_pracownika"]; i++;
+                }
+                sqlConn.Close();
+                Console.ReadLine();
+            }
+            catch (System.Data.SqlClient.SqlException se)
+            {
+                MessageBox.Show("Nastąpil bląd połaczenia: " + se);
+            }
         
+        
+        }
+
+        private void Delete()
+        {
+            MessageBox.Show("Usuwanie");
+            string instance = @"ELPLC-0305\SQLEXPRESS";
+            string dbdir = "Pracownicy";
+            string id = "sa";
+            string password = "Pr4ktyk4nt1!";
+            SqlConnection sqlConn = new SqlConnection("Data Source=" + instance + ";" + "User ID=" + id + ";" + "Password=" + password + ";" + "Initial Catalog=" + dbdir + ";");
+
+            try
+            {
+                //MessageBox.Show("Connected");
+                sqlConn.Open();
+                DateTime date = DateTime.Now;
+                Console.WriteLine("Połączono z bazą danych!");
+                ListofEmployees();
+                int condition = IDs[SqldataGridView.SelectedRows[0].Index];
+                //MessageBox.Show(condition.ToString());
+                SqlCommand cmd = new SqlCommand("DELETE FROM dbo.PRACOWNICY where id_pracownika='" + condition + "';", sqlConn);
+
+                SqlDataReader rdr = cmd.ExecuteReader();
+                sqlConn.Close();
+                //MessageBox.Show("finished");
+            }
+
+            catch (System.Data.SqlClient.SqlException se)
+            {
+                MessageBox.Show("Nastąpil bląd połaczenia: " + se);
+            }
+        }
         
 
     }

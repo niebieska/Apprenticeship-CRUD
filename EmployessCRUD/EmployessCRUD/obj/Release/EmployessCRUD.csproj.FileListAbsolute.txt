@@ -1,0 +1,9 @@
+C:\Users\praktykant\Documents\Visual Studio 2008\Projects\Intership-CRUD\EmployessCRUD\EmployessCRUD\bin\Release\EmployessCRUD.exe
+C:\Users\praktykant\Documents\Visual Studio 2008\Projects\Intership-CRUD\EmployessCRUD\EmployessCRUD\bin\Release\EmployessCRUD.pdb
+C:\Users\praktykant\Documents\Visual Studio 2008\Projects\Intership-CRUD\EmployessCRUD\EmployessCRUD\obj\Release\ResolveAssemblyReference.cache
+C:\Users\praktykant\Documents\Visual Studio 2008\Projects\Intership-CRUD\EmployessCRUD\EmployessCRUD\obj\Release\EmployessCRUD.Form1.resources
+C:\Users\praktykant\Documents\Visual Studio 2008\Projects\Intership-CRUD\EmployessCRUD\EmployessCRUD\obj\Release\EmployessCRUD.AddForm.resources
+C:\Users\praktykant\Documents\Visual Studio 2008\Projects\Intership-CRUD\EmployessCRUD\EmployessCRUD\obj\Release\EmployessCRUD.Properties.Resources.resources
+C:\Users\praktykant\Documents\Visual Studio 2008\Projects\Intership-CRUD\EmployessCRUD\EmployessCRUD\obj\Release\EmployessCRUD.csproj.GenerateResource.Cache
+C:\Users\praktykant\Documents\Visual Studio 2008\Projects\Intership-CRUD\EmployessCRUD\EmployessCRUD\obj\Release\EmployessCRUD.exe
+C:\Users\praktykant\Documents\Visual Studio 2008\Projects\Intership-CRUD\EmployessCRUD\EmployessCRUD\obj\Release\EmployessCRUD.pdb
