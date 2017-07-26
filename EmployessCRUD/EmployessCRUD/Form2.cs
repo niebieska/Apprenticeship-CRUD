@@ -23,10 +23,15 @@ namespace EmployessCRUD
         int JobTitleId;
         int D = 1, J = 1;
 
-        public AddForm()
+        public AddForm(string s)
         {
             InitializeComponent();
-            HelptextBox.Text = CountData().ToString();
+            if (s.Length > 1)
+            {
+                HelptextBox.Text = s; 
+
+            }
+            
         }
 
         private void SaveBtn_Click(object sender, EventArgs e)

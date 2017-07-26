@@ -78,7 +78,7 @@ namespace EmployessCRUD
 
         private void CreateBtn_Click(object sender, EventArgs e)
         {
-            AddForm aform = new AddForm();
+            AddForm aform = new AddForm("");
             string sql = "select p.id_pracownika as ID, p.imie as Imie, p.nazwisko as Nazwisko,  s.nazwa as Stanowisko, d.nazwa_dzialu as 'Nazwa działu', si.nazwa_siedziby as Siedziba, si.adres as Adres" +
                    " from PRACOWNICY p join DZIALY d on p.id_dzialu=d.id_dzialu join STANOWISKA s on p.id_stanowiska=s.id_stanowiska join SIEDZIBY si on d.id_siedziby=si.id_siedziby;";
             aform.ShowDialog();
@@ -90,10 +90,13 @@ namespace EmployessCRUD
 
         private void UpdateBtn_Click(object sender, EventArgs e)
         {
+            ListofEmployees();
             if (IsClicked == false) { MessageBox.Show("Nie wybrano Pracownika !"); }
             else
             {
-                int IDE = SqldataGridView.SelectedRows[0].Index; 
+                IsClicked = false;
+                AddForm aform= new AddForm( " "+IDs[SqldataGridView.SelectedRows[0].Index]);
+                aform.ShowDialog();
             
             
             }
@@ -105,6 +108,8 @@ namespace EmployessCRUD
             if (IsClicked == false) { MessageBox.Show("Nie wybrano Pracownika !"); }
             else
             {
+                IsClicked = false;
+                ListofEmployees();
                 int IDE = IDs[SqldataGridView.SelectedRows[0].Index];
 
                 DialogResult dr = MessageBox.Show("Czy na pewno chcesz usunac wybrany  rekord?",
@@ -115,14 +120,15 @@ namespace EmployessCRUD
                 {
                     case DialogResult.Yes: Delete(IDE);
                         LoadDataToSqldataGridView("Pracownicy", sql);
-                        EmployeesBtn.Enabled = false; break;
+                         MessageBox.Show("After Delete"); break;
                     case DialogResult.No: break;
                 }
             }
         }
 
         private void LoadDataToSqldataGridView(string TableName, string sql) 
-        { 
+        {
+            //MessageBox.Show("Data Loading ...");
             string instance = @"ELPLC-0305\SQLEXPRESS";
             string dbdir = "Pracownicy";
             string id = "sa";
@@ -192,7 +198,7 @@ namespace EmployessCRUD
 
         private void Delete(int condition)
         {
-            MessageBox.Show("Usuwanie");
+            //MessageBox.Show("Usuwanie");
             string instance = @"ELPLC-0305\SQLEXPRESS";
             string dbdir = "Pracownicy";
             string id = "sa";
@@ -205,8 +211,7 @@ namespace EmployessCRUD
                 sqlConn.Open();
                 DateTime date = DateTime.Now;
                 Console.WriteLine("Połączono z bazą danych!");
-                ListofEmployees();
-                
+                               
                 //MessageBox.Show(condition.ToString());
                 SqlCommand cmd = new SqlCommand("DELETE FROM dbo.PRACOWNICY where id_pracownika='" + condition + "';", sqlConn);
 
