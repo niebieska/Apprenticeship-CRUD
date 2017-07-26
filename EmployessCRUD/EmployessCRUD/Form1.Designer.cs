@@ -164,6 +164,7 @@
             this.SqldataGridView.Name = "SqldataGridView";
             this.SqldataGridView.Size = new System.Drawing.Size(742, 292);
             this.SqldataGridView.TabIndex = 9;
+            this.SqldataGridView.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.SqldataGridView_CellContentClick);
             // 
             // TurnOffEditBth
             // 

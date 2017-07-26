@@ -12,7 +12,8 @@ using System.IO;
 namespace EmployessCRUD
 {
     public partial class Form1 : Form
-    {    
+    {
+        bool IsClicked = false;
         /*Deklaracje zmiennych globalnych*/
         SqlDataAdapter dataadapter;
         SqlCommandBuilder databuilder;
@@ -20,6 +21,7 @@ namespace EmployessCRUD
         DataTable sTable;
         int[] IDs = new int[50]; //tablica z numerami ID pracowników
         int i = 0;
+        int ChoosenEmployee = 0;
        
 
 
@@ -88,23 +90,31 @@ namespace EmployessCRUD
 
         private void UpdateBtn_Click(object sender, EventArgs e)
         {
+            if (IsClicked == false) { MessageBox.Show("Nie wybrano Pracownika !"); }
+            else { }
 
         }
 
         private void DeleteBtn_Click(object sender, EventArgs e)
         {
-            DialogResult dr = MessageBox.Show("Czy na pewno chcesz usunac wybrany  rekord?",
-                     "Usuwanie", MessageBoxButtons.YesNo);
-            string sql = "select p.id_pracownika as ID, p.imie as Imie, p.nazwisko as Nazwisko,  s.nazwa as Stanowisko, d.nazwa_dzialu as 'Nazwa działu', si.nazwa_siedziby as Siedziba, si.adres as Adres" +
-                     " from PRACOWNICY p join DZIALY d on p.id_dzialu=d.id_dzialu join STANOWISKA s on p.id_stanowiska=s.id_stanowiska join SIEDZIBY si on d.id_siedziby=si.id_siedziby;";
-            switch (dr)
-            {
-                case DialogResult.Yes: Delete(); 
-                    LoadDataToSqldataGridView("Pracownicy", sql);
-                    EmployeesBtn.Enabled = false; break;
-                case DialogResult.No: break;
-            }
+            //int IDE=IDs[SqldataGridView.SelectedRows[0].Index];
 
+            if (IsClicked == false) { MessageBox.Show("Nie wybrano Pracownika !"); }
+            else
+            {
+                int IDE = SqldataGridView.SelectedRows[0].Index;
+                DialogResult dr = MessageBox.Show("Czy na pewno chcesz usunac wybrany  rekord?",
+                         "Usuwanie", MessageBoxButtons.YesNo);
+                string sql = "select p.id_pracownika as ID, p.imie as Imie, p.nazwisko as Nazwisko,  s.nazwa as Stanowisko, d.nazwa_dzialu as 'Nazwa działu', si.nazwa_siedziby as Siedziba, si.adres as Adres" +
+                         " from PRACOWNICY p join DZIALY d on p.id_dzialu=d.id_dzialu join STANOWISKA s on p.id_stanowiska=s.id_stanowiska join SIEDZIBY si on d.id_siedziby=si.id_siedziby;";
+                switch (dr)
+                {
+                    case DialogResult.Yes: Delete(IDE);
+                        LoadDataToSqldataGridView("Pracownicy", sql);
+                        EmployeesBtn.Enabled = false; break;
+                    case DialogResult.No: break;
+                }
+            }
         }
 
         private void LoadDataToSqldataGridView(string TableName, string sql) 
@@ -176,7 +186,7 @@ namespace EmployessCRUD
         
         }
 
-        private void Delete()
+        private void Delete(int condition)
         {
             MessageBox.Show("Usuwanie");
             string instance = @"ELPLC-0305\SQLEXPRESS";
@@ -192,7 +202,7 @@ namespace EmployessCRUD
                 DateTime date = DateTime.Now;
                 Console.WriteLine("Połączono z bazą danych!");
                 ListofEmployees();
-                int condition = IDs[SqldataGridView.SelectedRows[0].Index];
+                
                 //MessageBox.Show(condition.ToString());
                 SqlCommand cmd = new SqlCommand("DELETE FROM dbo.PRACOWNICY where id_pracownika='" + condition + "';", sqlConn);
 
@@ -205,6 +215,11 @@ namespace EmployessCRUD
             {
                 MessageBox.Show("Nastąpil bląd połaczenia: " + se);
             }
+        }
+
+        private void SqldataGridView_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            IsClicked = true;
         }
         
 
