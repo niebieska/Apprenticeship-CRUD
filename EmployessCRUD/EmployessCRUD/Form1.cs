@@ -91,18 +91,22 @@ namespace EmployessCRUD
         private void UpdateBtn_Click(object sender, EventArgs e)
         {
             if (IsClicked == false) { MessageBox.Show("Nie wybrano Pracownika !"); }
-            else { }
+            else
+            {
+                int IDE = SqldataGridView.SelectedRows[0].Index; 
+            
+            
+            }
 
         }
 
         private void DeleteBtn_Click(object sender, EventArgs e)
         {
-            //int IDE=IDs[SqldataGridView.SelectedRows[0].Index];
-
             if (IsClicked == false) { MessageBox.Show("Nie wybrano Pracownika !"); }
             else
             {
-                int IDE = SqldataGridView.SelectedRows[0].Index;
+                int IDE = IDs[SqldataGridView.SelectedRows[0].Index];
+
                 DialogResult dr = MessageBox.Show("Czy na pewno chcesz usunac wybrany  rekord?",
                          "Usuwanie", MessageBoxButtons.YesNo);
                 string sql = "select p.id_pracownika as ID, p.imie as Imie, p.nazwisko as Nazwisko,  s.nazwa as Stanowisko, d.nazwa_dzialu as 'Nazwa działu', si.nazwa_siedziby as Siedziba, si.adres as Adres" +
