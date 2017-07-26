@@ -21,7 +21,7 @@ namespace EmployessCRUD
 
         int DepartmentId;
         int JobTitleId;
-        int D = 1, J = 1,O=1;
+        int D = 1, J = 1;
 
         public AddForm()
         {
@@ -31,11 +31,16 @@ namespace EmployessCRUD
 
         private void SaveBtn_Click(object sender, EventArgs e)
         {
-
+            int ID = CountData() + 1;
+            InsertDataToEmployees(ID.ToString());
+            SaveBtn.Enabled = false;
+            
         }
+        
 
         private void ExitBtn_Click(object sender, EventArgs e)
         {
+            form1.Refresh();
             Close();
         }
         private void AddForm_Load(object sender, EventArgs e)
@@ -123,14 +128,10 @@ namespace EmployessCRUD
                 MessageBox.Show("Nastąpil bląd połaczenia: " + se);
                 
             }
-
-
-        
         }
-
+        
         private void OfficecomboBox_SelectedIndexChanged(object sender, EventArgs e)
         {
-
             string instance = @"ELPLC-0305\SQLEXPRESS";
             string dbdir = "Pracownicy";
             string id = "sa";
@@ -138,7 +139,7 @@ namespace EmployessCRUD
             string Office = "";
 
             SqlConnection sqlConn = new SqlConnection("Data Source=" + instance + ";" + "User ID=" + id + ";" + "Password=" + password + ";" + "Initial Catalog=" + dbdir + ";");
-            
+
             MessageBox.Show(this.OfficecomboBox.GetItemText(this.OfficecomboBox.SelectedItem));
             Office = this.OfficecomboBox.GetItemText(this.OfficecomboBox.SelectedItem);
             try
@@ -152,9 +153,9 @@ namespace EmployessCRUD
 
                 while (rdr.Read())
                 {
-                    string Nazwa = (string)rdr["nazwa_dzialu"];
-
-                    DepartmentcomboBox.Items.Add(Nazwa);
+                    string Name = (string)rdr["nazwa_dzialu"];
+                    Departments[(int)rdr["id_dzialu"]] = Name;
+                    DepartmentcomboBox.Items.Add(Name);
                 }
                 sqlConn.Close();
             }
@@ -164,8 +165,63 @@ namespace EmployessCRUD
                 MessageBox.Show("Nastąpil bląd połaczenia: Oddzialy " + se);
 
             }
-               
         }
+               
+         
+     private void InsertDataToEmployees(string ID) 
+        {
+            string instance = @"ELPLC-0305\SQLEXPRESS";
+            string dbdir = "Pracownicy";
+            string id = "sa";
+            string password = "Pr4ktyk4nt1!";
+            FindId();
+
+            SqlConnection sqlConn = new SqlConnection("Data Source=" + instance + ";" + "User ID=" + id + ";" + "Password=" + password + ";" + "Initial Catalog=" + dbdir + ";");
+            try
+            {
+                // otwórz połączenie:
+                sqlConn.Open();
+                MessageBox.Show("Połączono z bazą danych!");
+                SqlCommand cmd = new SqlCommand("insert into dbo.PRACOWNICY values (@id,@imie,@nazwisko,@data,@ids,@idd)", sqlConn);
+                cmd.Parameters.AddWithValue("@id", ID);
+                cmd.Parameters.AddWithValue("@imie", NametextBox.Text);
+                cmd.Parameters.AddWithValue("@nazwisko", SurnametextBox.Text);
+                cmd.Parameters.AddWithValue("@data", dateTimePicker1.Value.ToString());
+                cmd.Parameters.AddWithValue("@ids", JobTitleId.ToString());
+                cmd.Parameters.AddWithValue("@idd", DepartmentId.ToString());
+                SqlDataReader rdr = cmd.ExecuteReader();
+                sqlConn.Close();
+
+            }
+            catch (System.Data.SqlClient.SqlException se)
+            {
+                MessageBox.Show("Nastąpil bląd połaczenia: " + se);
+                Console.ReadLine();
+            }
+     }
+     private void FindId() 
+     { 
+       while(J<50)
+       {
+           if (this.JobTitlecomboBox.GetItemText(this.JobTitlecomboBox.SelectedItem) == JobTitles[J])
+           {
+               JobTitleId = J; break;
+           }
+           J++;
+       
+       }
+     
+     while(D<50)
+       {
+           if (this.DepartmentcomboBox.GetItemText(this.DepartmentcomboBox .SelectedItem) == Departments[D])
+           {
+               DepartmentId = D; break;
+           }
+           D++;
+       
+       }
+     
+     }
 
 
 
