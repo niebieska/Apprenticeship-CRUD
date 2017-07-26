@@ -199,8 +199,7 @@ namespace CRUD_employees
                 }
                 // zamknij połaczenie:
                 sqlConn.Close();
-
-
+                
             }
             catch (System.Data.SqlClient.SqlException se)
             {

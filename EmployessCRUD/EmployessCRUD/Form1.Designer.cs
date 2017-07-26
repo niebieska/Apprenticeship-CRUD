@@ -55,6 +55,7 @@
             // 
             // EmployeesBtn
             // 
+            this.EmployeesBtn.BackColor = System.Drawing.Color.Navy;
             this.EmployeesBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.EmployeesBtn.ForeColor = System.Drawing.Color.Navy;
             this.EmployeesBtn.Image = ((System.Drawing.Image)(resources.GetObject("EmployeesBtn.Image")));
@@ -63,7 +64,7 @@
             this.EmployeesBtn.Size = new System.Drawing.Size(163, 23);
             this.EmployeesBtn.TabIndex = 1;
             this.EmployeesBtn.Text = "Pracownicy";
-            this.EmployeesBtn.UseVisualStyleBackColor = true;
+            this.EmployeesBtn.UseVisualStyleBackColor = false;
             this.EmployeesBtn.Click += new System.EventHandler(this.EmployeesBtn_Click);
             // 
             // JobTitlesbtn

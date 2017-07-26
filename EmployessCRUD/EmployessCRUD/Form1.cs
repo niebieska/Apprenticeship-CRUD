@@ -47,7 +47,8 @@ namespace EmployessCRUD
             MainPicture.Hide();
             string sql = "select p.id_pracownika as ID, p.imie as Imie, p.nazwisko as Nazwisko,  s.nazwa as Stanowisko, d.nazwa_dzialu as 'Nazwa działu', si.nazwa_siedziby as Siedziba, si.adres as Adres" +
                     " from PRACOWNICY p join DZIALY d on p.id_dzialu=d.id_dzialu join STANOWISKA s on p.id_stanowiska=s.id_stanowiska join SIEDZIBY si on d.id_siedziby=si.id_siedziby;";
-            LoadDataToSqldataGridView("Pracownicy",sql); 
+            LoadDataToSqldataGridView("Pracownicy",sql);
+            EmployeesBtn.Enabled = false;
         }
 
         private void TurnOnEditBth_Click(object sender, EventArgs e)

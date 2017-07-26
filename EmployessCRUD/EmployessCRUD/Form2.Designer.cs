@@ -91,6 +91,7 @@
             this.OfficecomboBox.Name = "OfficecomboBox";
             this.OfficecomboBox.Size = new System.Drawing.Size(186, 21);
             this.OfficecomboBox.TabIndex = 10;
+            this.OfficecomboBox.SelectedIndexChanged += new System.EventHandler(this.OfficecomboBox_SelectedIndexChanged);
             // 
             // DepartmentcomboBox
             // 
