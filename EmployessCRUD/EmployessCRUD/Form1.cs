@@ -14,6 +14,7 @@ namespace EmployessCRUD
     public partial class Form1 : Form
     {
         bool IsClicked = false;
+        int Key = 0;
         /*Deklaracje zmiennych globalnych*/
         SqlDataAdapter dataadapter;
         SqlCommandBuilder databuilder;
@@ -26,6 +27,7 @@ namespace EmployessCRUD
         {
             InitializeComponent();
             SqldataGridView.Hide();
+            tableLayoutPanel1.Hide();
             CreateBtn.Hide();
             UpdateBtn.Hide();
             UpdateBtn.Enabled = false;
@@ -33,11 +35,14 @@ namespace EmployessCRUD
             DeleteBtn.Enabled = false;
             TurnOnEditBth.Hide();
             TurnOffEditBth.Hide();
+            SaveBtn.Hide();
+            
             SqldataGridView.ReadOnly = false;
         }
 
         private void EmployeesBtn_Click(object sender, EventArgs e)
         {
+            Key = 1;
             JobTitlesbtn.Enabled = true;
             DepartmentsBtn.Enabled = true;
             OfficesBtn.Enabled = true;
@@ -75,12 +80,16 @@ namespace EmployessCRUD
 
         private void CreateBtn_Click(object sender, EventArgs e)
         {
-            AddForm aform = new AddForm("");
-            string sql = "select p.id_pracownika as ID, p.imie as Imie, p.nazwisko as Nazwisko,  s.nazwa as Stanowisko, d.nazwa_dzialu as 'Nazwa działu', si.nazwa_siedziby as Siedziba, si.adres as Adres" +
-                   " from PRACOWNICY p join DZIALY d on p.id_dzialu=d.id_dzialu join STANOWISKA s on p.id_stanowiska=s.id_stanowiska join SIEDZIBY si on d.id_siedziby=si.id_siedziby;";
-            aform.ShowDialog();
-            LoadDataToSqldataGridView("Pracownicy", sql);
-            EmployeesBtn.Enabled = false;
+            switch (Key)
+            {
+                case 1: CreateEmployees(); break;
+                case 2: tableLayoutPanel1.Show(); SaveBtn.Show(); MessageBox.Show("Stanowiska"); break;
+                case 3: MessageBox.Show("Oddziały"); break;
+                default: MessageBox.Show("Działy"); break;
+            
+            
+            }
+
         }
 
         private void UpdateBtn_Click(object sender, EventArgs e)
@@ -185,7 +194,17 @@ namespace EmployessCRUD
             }      
         
         }
-
+        private void CreateEmployees() 
+        {
+            AddForm aform = new AddForm("");
+            string sql = "select p.id_pracownika as ID, p.imie as Imie, p.nazwisko as Nazwisko,  s.nazwa as Stanowisko, d.nazwa_dzialu as 'Nazwa działu', si.nazwa_siedziby as Siedziba, si.adres as Adres" +
+                   " from PRACOWNICY p join DZIALY d on p.id_dzialu=d.id_dzialu join STANOWISKA s on p.id_stanowiska=s.id_stanowiska join SIEDZIBY si on d.id_siedziby=si.id_siedziby;";
+            aform.ShowDialog();
+            LoadDataToSqldataGridView("Pracownicy", sql);
+            EmployeesBtn.Enabled = false;
+        
+        
+        }
         private void Delete(int condition)
         {
             //MessageBox.Show("Usuwanie");
@@ -223,6 +242,7 @@ namespace EmployessCRUD
 
         private void JobTitlesbtn_Click(object sender, EventArgs e)
         {
+            Key = 2;
             EmployeesBtn.Enabled = true;
             OfficesBtn.Enabled = true;
             DepartmentsBtn.Enabled = true;
@@ -239,6 +259,7 @@ namespace EmployessCRUD
 
         private void OfficesBtn_Click(object sender, EventArgs e)
         {
+            Key = 3;
             EmployeesBtn.Enabled = true;
             JobTitlesbtn.Enabled = true;
             DepartmentsBtn.Enabled = true;
@@ -256,6 +277,7 @@ namespace EmployessCRUD
 
         private void DepartmentsBtn_Click(object sender, EventArgs e)
         {
+            Key = 4;
             EmployeesBtn.Enabled = true;
             JobTitlesbtn.Enabled = true;
             OfficesBtn.Enabled = true;
@@ -269,6 +291,48 @@ namespace EmployessCRUD
             LoadDataToSqldataGridView("Dzialy", sql);
             DepartmentsBtn.Enabled = false;
 
+        }
+
+        private void SaveBtn_Click(object sender, EventArgs e)
+        {
+            AddForm aform = new AddForm("");
+            switch (Key)
+            {
+                case 2: InsertToJobTitles(); LoadDataToSqldataGridView("Stanowiska","select id_stanowiska, nazwa as Stanowisko from STANOWISKA "); break;
+                case 3: break;
+                default: break;
+            
+            
+            }
+        }
+        private void InsertToJobTitles()
+        {
+            AddForm aform = new AddForm("");
+            string instance = @"ELPLC-0305\SQLEXPRESS";
+            string dbdir = "Pracownicy";
+            string id = "sa";
+            string password = "Pr4ktyk4nt1!";
+            int ID = aform.CountData("SELECT  max(id_stanowiska) as ilosc FROM STANOWISKA;") + 1;
+
+            SqlConnection sqlConn = new SqlConnection("Data Source=" + instance + ";" + "User ID=" + id + ";" + "Password=" + password + ";" + "Initial Catalog=" + dbdir + ";");
+            try
+            {
+                sqlConn.Open();
+                SqlCommand cmd = new SqlCommand("insert into dbo.STANOWISKA values (@id,@nazwa)", sqlConn);
+                cmd.Parameters.AddWithValue("@id", ID.ToString());
+                cmd.Parameters.AddWithValue("@nazwa", TitlestextBox.Text);
+
+                SqlDataReader rdr = cmd.ExecuteReader();
+                sqlConn.Close();
+            }
+            catch (System.Data.SqlClient.SqlException se)
+            {
+                MessageBox.Show("Nastąpil bląd połaczenia: " + se);
+                Console.ReadLine();
+            }
+        
+        
+        
         }
         
 

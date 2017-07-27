@@ -38,7 +38,7 @@ namespace EmployessCRUD
         {
             if (HelptextBox.Text.Length < 1)
             {
-                int ID = CountData() + 1;
+                int ID = CountData("SELECT  max(id_pracownika) as ilosc FROM PRACOWNICY;") + 1;
                 InsertDataToEmployees(ID.ToString());
                 SaveBtn.Enabled = false;
             }
@@ -61,7 +61,7 @@ namespace EmployessCRUD
             ComboBoxPreparation();
         }
 
-        private int CountData() 
+        public int CountData(string sql) 
         {
             int iloscrekordow = 0;
             string instance = @"ELPLC-0305\SQLEXPRESS";
@@ -73,7 +73,7 @@ namespace EmployessCRUD
             try
             {
                 sqlConn.Open();
-                SqlCommand cmd = new SqlCommand("SELECT  max(id_pracownika) as ilosc FROM PRACOWNICY;", sqlConn);
+                SqlCommand cmd = new SqlCommand(sql, sqlConn);
                 SqlDataReader rdr = cmd.ExecuteReader();
 
                 while (rdr.Read())

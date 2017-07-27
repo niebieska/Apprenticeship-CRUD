@@ -40,14 +40,19 @@
             this.TurnOnEditBth = new System.Windows.Forms.Button();
             this.SqldataGridView = new System.Windows.Forms.DataGridView();
             this.TurnOffEditBth = new System.Windows.Forms.Button();
+            this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
+            this.JobTitlesLabel = new System.Windows.Forms.Label();
+            this.TitlestextBox = new System.Windows.Forms.TextBox();
+            this.SaveBtn = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.MainPicture)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.SqldataGridView)).BeginInit();
+            this.tableLayoutPanel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // MainPicture
             // 
             this.MainPicture.Image = ((System.Drawing.Image)(resources.GetObject("MainPicture.Image")));
-            this.MainPicture.Location = new System.Drawing.Point(38, 53);
+            this.MainPicture.Location = new System.Drawing.Point(22, 53);
             this.MainPicture.Name = "MainPicture";
             this.MainPicture.Size = new System.Drawing.Size(708, 292);
             this.MainPicture.TabIndex = 0;
@@ -185,11 +190,56 @@
             this.TurnOffEditBth.UseVisualStyleBackColor = true;
             this.TurnOffEditBth.Click += new System.EventHandler(this.TurnOffEditBth_Click);
             // 
+            // tableLayoutPanel1
+            // 
+            this.tableLayoutPanel1.ColumnCount = 2;
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 22F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 78F));
+            this.tableLayoutPanel1.Controls.Add(this.JobTitlesLabel, 0, 0);
+            this.tableLayoutPanel1.Controls.Add(this.TitlestextBox, 1, 0);
+            this.tableLayoutPanel1.Location = new System.Drawing.Point(352, 53);
+            this.tableLayoutPanel1.Name = "tableLayoutPanel1";
+            this.tableLayoutPanel1.RowCount = 1;
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(312, 33);
+            this.tableLayoutPanel1.TabIndex = 11;
+            // 
+            // JobTitlesLabel
+            // 
+            this.JobTitlesLabel.AutoSize = true;
+            this.JobTitlesLabel.Location = new System.Drawing.Point(3, 0);
+            this.JobTitlesLabel.Name = "JobTitlesLabel";
+            this.JobTitlesLabel.Size = new System.Drawing.Size(62, 13);
+            this.JobTitlesLabel.TabIndex = 0;
+            this.JobTitlesLabel.Text = "Stanowisko";
+            // 
+            // TitlestextBox
+            // 
+            this.TitlestextBox.Location = new System.Drawing.Point(71, 3);
+            this.TitlestextBox.Name = "TitlestextBox";
+            this.TitlestextBox.Size = new System.Drawing.Size(208, 20);
+            this.TitlestextBox.TabIndex = 1;
+            // 
+            // SaveBtn
+            // 
+            this.SaveBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.SaveBtn.ForeColor = System.Drawing.Color.Navy;
+            this.SaveBtn.Image = ((System.Drawing.Image)(resources.GetObject("SaveBtn.Image")));
+            this.SaveBtn.Location = new System.Drawing.Point(549, 92);
+            this.SaveBtn.Name = "SaveBtn";
+            this.SaveBtn.Size = new System.Drawing.Size(82, 23);
+            this.SaveBtn.TabIndex = 12;
+            this.SaveBtn.Text = "Zapisz";
+            this.SaveBtn.UseVisualStyleBackColor = true;
+            this.SaveBtn.Click += new System.EventHandler(this.SaveBtn_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(784, 464);
+            this.Controls.Add(this.SaveBtn);
+            this.Controls.Add(this.tableLayoutPanel1);
             this.Controls.Add(this.TurnOnEditBth);
             this.Controls.Add(this.DeleteBtn);
             this.Controls.Add(this.UpdateBtn);
@@ -207,6 +257,8 @@
             this.Load += new System.EventHandler(this.Form1_Load);
             ((System.ComponentModel.ISupportInitialize)(this.MainPicture)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.SqldataGridView)).EndInit();
+            this.tableLayoutPanel1.ResumeLayout(false);
+            this.tableLayoutPanel1.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -224,6 +276,10 @@
         private System.Windows.Forms.Button TurnOnEditBth;
         private System.Windows.Forms.DataGridView SqldataGridView;
         private System.Windows.Forms.Button TurnOffEditBth;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
+        private System.Windows.Forms.Label JobTitlesLabel;
+        private System.Windows.Forms.TextBox TitlestextBox;
+        private System.Windows.Forms.Button SaveBtn;
     }
 }
 
