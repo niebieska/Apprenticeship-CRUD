@@ -101,6 +101,19 @@ namespace EmployessCRUD
 
         private void UpdateBtn_Click(object sender, EventArgs e)
         {
+            switch (Key) 
+            {
+                case 1: Update_Employees(); break;
+                case 2: break;
+                case 3: break;
+                default: break;
+            }
+            
+            
+            
+        }
+        private void Update_Employees()
+        {
             string sql = "select p.id_pracownika as ID, p.imie as Imie, p.nazwisko as Nazwisko,  s.nazwa as Stanowisko, d.nazwa_dzialu as 'Nazwa działu', si.nazwa_siedziby as Siedziba, si.adres as Adres" +
                          " from PRACOWNICY p join DZIALY d on p.id_dzialu=d.id_dzialu join STANOWISKA s on p.id_stanowiska=s.id_stanowiska join SIEDZIBY si on d.id_siedziby=si.id_siedziby;";
             ListofEmployees();
@@ -108,11 +121,18 @@ namespace EmployessCRUD
             else
             {
                 IsClicked = false;
-                AddForm aform= new AddForm( " "+IDs[SqldataGridView.SelectedRows[0].Index]);
-                aform.ShowDialog();                      
+                AddForm aform = new AddForm(" " + IDs[SqldataGridView.SelectedRows[0].Index]);
+                aform.ShowDialog();
             }
             LoadDataToSqldataGridView("Pracownicy", sql);
+       
         }
+
+        private void Update_Offices() { }
+        private void Update_Departments() { }
+        private void Update_JobTitles() { }
+
+
 
         private void DeleteBtn_Click(object sender, EventArgs e)
         {
