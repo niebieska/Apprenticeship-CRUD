@@ -38,6 +38,9 @@ namespace EmployessCRUD
 
         private void EmployeesBtn_Click(object sender, EventArgs e)
         {
+            JobTitlesbtn.Enabled = true;
+            DepartmentsBtn.Enabled = true;
+            OfficesBtn.Enabled = true;
             SqldataGridView.Show();
             CreateBtn.Show();
             UpdateBtn.Show();
@@ -216,6 +219,56 @@ namespace EmployessCRUD
         private void SqldataGridView_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
             IsClicked = true;
+        }
+
+        private void JobTitlesbtn_Click(object sender, EventArgs e)
+        {
+            EmployeesBtn.Enabled = true;
+            OfficesBtn.Enabled = true;
+            DepartmentsBtn.Enabled = true;
+            SqldataGridView.Show();
+            CreateBtn.Show();
+            UpdateBtn.Show();
+            DeleteBtn.Show();
+            TurnOnEditBth.Show();
+            MainPicture.Hide();
+            string sql = "select id_stanowiska, nazwa as Stanowisko from STANOWISKA ";
+            LoadDataToSqldataGridView("Stanowiska", sql);
+            JobTitlesbtn.Enabled = false;
+        }
+
+        private void OfficesBtn_Click(object sender, EventArgs e)
+        {
+            EmployeesBtn.Enabled = true;
+            JobTitlesbtn.Enabled = true;
+            DepartmentsBtn.Enabled = true;
+            SqldataGridView.Show();
+            CreateBtn.Show();
+            UpdateBtn.Show();
+            DeleteBtn.Show();
+            TurnOnEditBth.Show();
+            MainPicture.Hide();
+            string sql = "select id_siedziby as ID ,nazwa_siedziby as Oddział, adres as Adres from SIEDZIBY ";
+            LoadDataToSqldataGridView("Siedziby", sql);
+            OfficesBtn.Enabled = false;
+
+        }
+
+        private void DepartmentsBtn_Click(object sender, EventArgs e)
+        {
+            EmployeesBtn.Enabled = true;
+            JobTitlesbtn.Enabled = true;
+            OfficesBtn.Enabled = true;
+            SqldataGridView.Show();
+            CreateBtn.Show();
+            UpdateBtn.Show();
+            DeleteBtn.Show();
+            TurnOnEditBth.Show();
+            MainPicture.Hide();
+            string sql = "select d.nazwa_dzialu, s.nazwa_siedziby, s.adres from DZIALY d join SIEDZIBY s on  d.id_siedziby=s.id_siedziby ";
+            LoadDataToSqldataGridView("Dzialy", sql);
+            DepartmentsBtn.Enabled = false;
+
         }
         
 

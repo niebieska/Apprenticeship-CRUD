@@ -69,6 +69,7 @@
             // 
             // JobTitlesbtn
             // 
+            this.JobTitlesbtn.BackColor = System.Drawing.Color.Navy;
             this.JobTitlesbtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.JobTitlesbtn.ForeColor = System.Drawing.Color.Navy;
             this.JobTitlesbtn.Image = ((System.Drawing.Image)(resources.GetObject("JobTitlesbtn.Image")));
@@ -77,10 +78,12 @@
             this.JobTitlesbtn.Size = new System.Drawing.Size(163, 23);
             this.JobTitlesbtn.TabIndex = 2;
             this.JobTitlesbtn.Text = "Stanowiska";
-            this.JobTitlesbtn.UseVisualStyleBackColor = true;
+            this.JobTitlesbtn.UseVisualStyleBackColor = false;
+            this.JobTitlesbtn.Click += new System.EventHandler(this.JobTitlesbtn_Click);
             // 
             // OfficesBtn
             // 
+            this.OfficesBtn.BackColor = System.Drawing.Color.Navy;
             this.OfficesBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.OfficesBtn.ForeColor = System.Drawing.Color.Navy;
             this.OfficesBtn.Image = ((System.Drawing.Image)(resources.GetObject("OfficesBtn.Image")));
@@ -88,11 +91,13 @@
             this.OfficesBtn.Name = "OfficesBtn";
             this.OfficesBtn.Size = new System.Drawing.Size(163, 23);
             this.OfficesBtn.TabIndex = 3;
-            this.OfficesBtn.Text = "Siedziby";
-            this.OfficesBtn.UseVisualStyleBackColor = true;
+            this.OfficesBtn.Text = "Oddziały";
+            this.OfficesBtn.UseVisualStyleBackColor = false;
+            this.OfficesBtn.Click += new System.EventHandler(this.OfficesBtn_Click);
             // 
             // DepartmentsBtn
             // 
+            this.DepartmentsBtn.BackColor = System.Drawing.Color.Navy;
             this.DepartmentsBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.DepartmentsBtn.ForeColor = System.Drawing.Color.Navy;
             this.DepartmentsBtn.Image = ((System.Drawing.Image)(resources.GetObject("DepartmentsBtn.Image")));
@@ -101,7 +106,8 @@
             this.DepartmentsBtn.Size = new System.Drawing.Size(163, 23);
             this.DepartmentsBtn.TabIndex = 4;
             this.DepartmentsBtn.Text = "Działy";
-            this.DepartmentsBtn.UseVisualStyleBackColor = true;
+            this.DepartmentsBtn.UseVisualStyleBackColor = false;
+            this.DepartmentsBtn.Click += new System.EventHandler(this.DepartmentsBtn_Click);
             // 
             // CreateBtn
             // 
