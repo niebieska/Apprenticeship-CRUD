@@ -13,9 +13,10 @@ namespace EmployessCRUD
 {
     public partial class Form1 : Form
     {
+        /*Deklaracje zmiennych globalnych*/
         bool IsClicked = false;
         int Key = 0;
-        /*Deklaracje zmiennych globalnych*/
+        string[] Offices = new string[50];
         SqlDataAdapter dataadapter;
         SqlCommandBuilder databuilder;
         DataSet ds;
@@ -91,7 +92,7 @@ namespace EmployessCRUD
                 case 1: CreateEmployees(); break;
                 case 2: tableLayoutPanel1.Show(); SaveBtn.Show(); MessageBox.Show("Stanowiska"); break;
                 case 3: tableLayoutPanel2.Show(); SaveBtn.Show(); MessageBox.Show("Oddziały"); break;
-                default: MessageBox.Show("Działy"); break;
+                default: tableLayoutPanel3.Show(); SaveBtn.Show(); ComboBoxPreparation(); MessageBox.Show("Działy"); break;
             
             
             }
@@ -312,13 +313,31 @@ namespace EmployessCRUD
         }
 
         private void SaveBtn_Click(object sender, EventArgs e)
-        {   string text= "Wprowadzone słowo jest za krótkie" ;
+        {
+            string text = "Wprowadzone słowo jest za krótkie", text2 = "Nie wybrano biura dla tworzonego działu";
             AddForm aform = new AddForm("");
             switch (Key)
             {
                 case 2: if (TitlestextBox.Text.Length < 3) { MessageBox.Show(text); } else { InsertToJobTitles(); LoadDataToSqldataGridView("Stanowiska", "select id_stanowiska, nazwa as Stanowisko from STANOWISKA "); TitlestextBox.Text = ""; } break;
                 case 3: if (OfficeNametextBox.Text.Length < 3 || OfficeAdresstextBox.Text.Length < 3) { MessageBox.Show(text); } else { InsertIntoOffices(); LoadDataToSqldataGridView("Siedziby", "select id_siedziby as ID ,nazwa_siedziby as Oddział, adres as Adres from SIEDZIBY "); OfficeNametextBox.Text = ""; OfficeAdresstextBox.Text = ""; } break;
-                default: break;
+                default: 
+                    if (this.OfficecomboBox.GetItemText(this.OfficecomboBox.SelectedItem) == "0")
+                    {
+                        MessageBox.Show(text2); 
+                    } 
+                    else {
+                        if (DepartmenttextBox.Text.Length < 2)
+                        {
+                            MessageBox.Show(text);
+                        }
+                            InsertIntoDepartments(); 
+                            LoadDataToSqldataGridView("Dzialy", "select d.nazwa_dzialu, s.nazwa_siedziby, s.adres from DZIALY d join SIEDZIBY s on  d.id_siedziby=s.id_siedziby ");
+                            DepartmenttextBox.Text = "";
+                            OfficecomboBox.Text = "";
+                            
+                        
+                    } 
+                    break;
             
             
             }
@@ -376,15 +395,85 @@ namespace EmployessCRUD
             {
                 MessageBox.Show("Nastąpil bląd połaczenia: " + se);
                 Console.ReadLine();
-            } 
-        
-        
-        
-        
+            }  
+        }
+        private void ComboBoxPreparation()
+        {
+            string instance = @"ELPLC-0305\SQLEXPRESS";
+            string dbdir = "Pracownicy";
+            string id = "sa";
+            string password = "Pr4ktyk4nt1!";
+
+            SqlConnection sqlConn = new SqlConnection("Data Source=" + instance + ";" + "User ID=" + id + ";" + "Password=" + password + ";" + "Initial Catalog=" + dbdir + ";");
+
+            try
+            {
+                sqlConn.Open();
+                SqlCommand cmd = new SqlCommand();
+
+                cmd.CommandText = "select id_siedziby,nazwa_siedziby" + " from SIEDZIBY;";
+                cmd.Connection = sqlConn;
+                SqlDataReader rdr = cmd.ExecuteReader();
+
+                while (rdr.Read())
+                {
+                    string Nazwa = (string)rdr["nazwa_siedziby"];
+                    Offices[(int)rdr["id_siedziby"]] = Nazwa;
+                    OfficecomboBox.Items.Add(Nazwa);
+                }
+                sqlConn.Close();
+            }
+            catch (System.Data.SqlClient.SqlException se)
+            {
+                MessageBox.Show("Nastąpil bląd połaczenia: " + se);
+            }
+        }
+
+        private void InsertIntoDepartments() 
+        {
+            AddForm aform = new AddForm("");
+            string instance = @"ELPLC-0305\SQLEXPRESS";
+            string dbdir = "Pracownicy";
+            string id = "sa";
+            string password = "Pr4ktyk4nt1!";
+            int ID = aform.CountData("SELECT  max(id_dzialu) as ilosc FROM DZIALY;") + 1;
+
+            SqlConnection sqlConn = new SqlConnection("Data Source=" + instance + ";" + "User ID=" + id + ";" + "Password=" + password + ";" + "Initial Catalog=" + dbdir + ";");
+            try
+            {
+                sqlConn.Open();
+                SqlCommand cmd = new SqlCommand("insert into dbo.DZIALY values (@id,@nazwa,@ids)", sqlConn);
+                cmd.Parameters.AddWithValue("@id", ID.ToString());
+                cmd.Parameters.AddWithValue("@nazwa", DepartmenttextBox.Text);
+                cmd.Parameters.AddWithValue("@ids", FindDepartmentId().ToString());
+                SqlDataReader rdr = cmd.ExecuteReader();
+                sqlConn.Close();
+            }
+            catch (System.Data.SqlClient.SqlException se)
+            {
+                MessageBox.Show("Nastąpil bląd połaczenia: " + se);
+                Console.ReadLine();
+            }  
+			
+ 
         
         
         
         }
+        private int FindDepartmentId() 
+        {
+            int IDO = 0,O=0;
+            while (O < 50)
+            {
+                if (this.OfficecomboBox.GetItemText(this.OfficecomboBox.SelectedItem) == Offices[O])
+                {
+                    IDO = O; break;
+                }
+                O++;
+            }
+ 
 
+            return IDO; 
+        }
     }
 }

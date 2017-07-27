@@ -52,8 +52,8 @@
             this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
             this.DepartmentLabel = new System.Windows.Forms.Label();
             this.OfficeLabel = new System.Windows.Forms.Label();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
-            this.textBox3 = new System.Windows.Forms.TextBox();
+            this.OfficecomboBox = new System.Windows.Forms.ComboBox();
+            this.DepartmenttextBox = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.MainPicture)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.SqldataGridView)).BeginInit();
             this.tableLayoutPanel1.SuspendLayout();
@@ -301,8 +301,8 @@
             this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 63.45515F));
             this.tableLayoutPanel3.Controls.Add(this.DepartmentLabel, 0, 0);
             this.tableLayoutPanel3.Controls.Add(this.OfficeLabel, 0, 1);
-            this.tableLayoutPanel3.Controls.Add(this.comboBox1, 1, 1);
-            this.tableLayoutPanel3.Controls.Add(this.textBox3, 1, 0);
+            this.tableLayoutPanel3.Controls.Add(this.OfficecomboBox, 1, 1);
+            this.tableLayoutPanel3.Controls.Add(this.DepartmenttextBox, 1, 0);
             this.tableLayoutPanel3.Location = new System.Drawing.Point(425, 61);
             this.tableLayoutPanel3.Name = "tableLayoutPanel3";
             this.tableLayoutPanel3.RowCount = 2;
@@ -329,20 +329,20 @@
             this.OfficeLabel.TabIndex = 1;
             this.OfficeLabel.Text = "Oddział";
             // 
-            // comboBox1
+            // OfficecomboBox
             // 
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(114, 28);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(186, 21);
-            this.comboBox1.TabIndex = 2;
+            this.OfficecomboBox.FormattingEnabled = true;
+            this.OfficecomboBox.Location = new System.Drawing.Point(114, 28);
+            this.OfficecomboBox.Name = "OfficecomboBox";
+            this.OfficecomboBox.Size = new System.Drawing.Size(186, 21);
+            this.OfficecomboBox.TabIndex = 2;
             // 
-            // textBox3
+            // DepartmenttextBox
             // 
-            this.textBox3.Location = new System.Drawing.Point(114, 3);
-            this.textBox3.Name = "textBox3";
-            this.textBox3.Size = new System.Drawing.Size(188, 20);
-            this.textBox3.TabIndex = 3;
+            this.DepartmenttextBox.Location = new System.Drawing.Point(114, 3);
+            this.DepartmenttextBox.Name = "DepartmenttextBox";
+            this.DepartmenttextBox.Size = new System.Drawing.Size(188, 20);
+            this.DepartmenttextBox.TabIndex = 3;
             // 
             // Form1
             // 
@@ -359,11 +359,11 @@
             this.Controls.Add(this.JobTitlesbtn);
             this.Controls.Add(this.EmployeesBtn);
             this.Controls.Add(this.TurnOffEditBth);
+            this.Controls.Add(this.tableLayoutPanel3);
             this.Controls.Add(this.tableLayoutPanel1);
             this.Controls.Add(this.tableLayoutPanel2);
             this.Controls.Add(this.MainPicture);
             this.Controls.Add(this.SqldataGridView);
-            this.Controls.Add(this.tableLayoutPanel3);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "Form1";
             this.Text = "Employees Managment";
@@ -405,8 +405,8 @@
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel3;
         private System.Windows.Forms.Label DepartmentLabel;
         private System.Windows.Forms.Label OfficeLabel;
-        private System.Windows.Forms.ComboBox comboBox1;
-        private System.Windows.Forms.TextBox textBox3;
+        private System.Windows.Forms.ComboBox OfficecomboBox;
+        private System.Windows.Forms.TextBox DepartmenttextBox;
     }
 }
 
