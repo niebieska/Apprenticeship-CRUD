@@ -44,9 +44,21 @@
             this.JobTitlesLabel = new System.Windows.Forms.Label();
             this.TitlestextBox = new System.Windows.Forms.TextBox();
             this.SaveBtn = new System.Windows.Forms.Button();
+            this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
+            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.textBox2 = new System.Windows.Forms.TextBox();
+            this.OfficeNameLabel = new System.Windows.Forms.Label();
+            this.OfficeAdressLabel = new System.Windows.Forms.Label();
+            this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
+            this.DepartmentLabel = new System.Windows.Forms.Label();
+            this.OfficeLabel = new System.Windows.Forms.Label();
+            this.comboBox1 = new System.Windows.Forms.ComboBox();
+            this.textBox3 = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.MainPicture)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.SqldataGridView)).BeginInit();
             this.tableLayoutPanel1.SuspendLayout();
+            this.tableLayoutPanel2.SuspendLayout();
+            this.tableLayoutPanel3.SuspendLayout();
             this.SuspendLayout();
             // 
             // MainPicture
@@ -193,15 +205,15 @@
             // tableLayoutPanel1
             // 
             this.tableLayoutPanel1.ColumnCount = 2;
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 22F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 78F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 36.53846F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 63.46154F));
             this.tableLayoutPanel1.Controls.Add(this.JobTitlesLabel, 0, 0);
             this.tableLayoutPanel1.Controls.Add(this.TitlestextBox, 1, 0);
-            this.tableLayoutPanel1.Location = new System.Drawing.Point(352, 53);
+            this.tableLayoutPanel1.Location = new System.Drawing.Point(422, 90);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.RowCount = 1;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(312, 33);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(308, 33);
             this.tableLayoutPanel1.TabIndex = 11;
             // 
             // JobTitlesLabel
@@ -215,9 +227,9 @@
             // 
             // TitlestextBox
             // 
-            this.TitlestextBox.Location = new System.Drawing.Point(71, 3);
+            this.TitlestextBox.Location = new System.Drawing.Point(115, 3);
             this.TitlestextBox.Name = "TitlestextBox";
-            this.TitlestextBox.Size = new System.Drawing.Size(208, 20);
+            this.TitlestextBox.Size = new System.Drawing.Size(190, 20);
             this.TitlestextBox.TabIndex = 1;
             // 
             // SaveBtn
@@ -225,7 +237,7 @@
             this.SaveBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.SaveBtn.ForeColor = System.Drawing.Color.Navy;
             this.SaveBtn.Image = ((System.Drawing.Image)(resources.GetObject("SaveBtn.Image")));
-            this.SaveBtn.Location = new System.Drawing.Point(549, 92);
+            this.SaveBtn.Location = new System.Drawing.Point(648, 129);
             this.SaveBtn.Name = "SaveBtn";
             this.SaveBtn.Size = new System.Drawing.Size(82, 23);
             this.SaveBtn.TabIndex = 12;
@@ -233,11 +245,111 @@
             this.SaveBtn.UseVisualStyleBackColor = true;
             this.SaveBtn.Click += new System.EventHandler(this.SaveBtn_Click);
             // 
+            // tableLayoutPanel2
+            // 
+            this.tableLayoutPanel2.ColumnCount = 2;
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 36.19632F));
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 63.80368F));
+            this.tableLayoutPanel2.Controls.Add(this.textBox1, 1, 0);
+            this.tableLayoutPanel2.Controls.Add(this.textBox2, 1, 1);
+            this.tableLayoutPanel2.Controls.Add(this.OfficeNameLabel, 0, 0);
+            this.tableLayoutPanel2.Controls.Add(this.OfficeAdressLabel, 0, 1);
+            this.tableLayoutPanel2.Location = new System.Drawing.Point(422, 61);
+            this.tableLayoutPanel2.Name = "tableLayoutPanel2";
+            this.tableLayoutPanel2.RowCount = 2;
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel2.Size = new System.Drawing.Size(308, 62);
+            this.tableLayoutPanel2.TabIndex = 13;
+            // 
+            // textBox1
+            // 
+            this.textBox1.Location = new System.Drawing.Point(114, 3);
+            this.textBox1.Name = "textBox1";
+            this.textBox1.Size = new System.Drawing.Size(189, 20);
+            this.textBox1.TabIndex = 0;
+            // 
+            // textBox2
+            // 
+            this.textBox2.Location = new System.Drawing.Point(114, 34);
+            this.textBox2.Name = "textBox2";
+            this.textBox2.Size = new System.Drawing.Size(189, 20);
+            this.textBox2.TabIndex = 1;
+            // 
+            // OfficeNameLabel
+            // 
+            this.OfficeNameLabel.AutoSize = true;
+            this.OfficeNameLabel.Location = new System.Drawing.Point(3, 0);
+            this.OfficeNameLabel.Name = "OfficeNameLabel";
+            this.OfficeNameLabel.Size = new System.Drawing.Size(89, 13);
+            this.OfficeNameLabel.TabIndex = 2;
+            this.OfficeNameLabel.Text = "Nazwa Oddziału:";
+            // 
+            // OfficeAdressLabel
+            // 
+            this.OfficeAdressLabel.AutoSize = true;
+            this.OfficeAdressLabel.Location = new System.Drawing.Point(3, 31);
+            this.OfficeAdressLabel.Name = "OfficeAdressLabel";
+            this.OfficeAdressLabel.Size = new System.Drawing.Size(37, 13);
+            this.OfficeAdressLabel.TabIndex = 3;
+            this.OfficeAdressLabel.Text = "Adres:";
+            // 
+            // tableLayoutPanel3
+            // 
+            this.tableLayoutPanel3.ColumnCount = 2;
+            this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 36.54485F));
+            this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 63.45515F));
+            this.tableLayoutPanel3.Controls.Add(this.DepartmentLabel, 0, 0);
+            this.tableLayoutPanel3.Controls.Add(this.OfficeLabel, 0, 1);
+            this.tableLayoutPanel3.Controls.Add(this.comboBox1, 1, 1);
+            this.tableLayoutPanel3.Controls.Add(this.textBox3, 1, 0);
+            this.tableLayoutPanel3.Location = new System.Drawing.Point(425, 61);
+            this.tableLayoutPanel3.Name = "tableLayoutPanel3";
+            this.tableLayoutPanel3.RowCount = 2;
+            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 43.93939F));
+            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 56.06061F));
+            this.tableLayoutPanel3.Size = new System.Drawing.Size(305, 57);
+            this.tableLayoutPanel3.TabIndex = 14;
+            // 
+            // DepartmentLabel
+            // 
+            this.DepartmentLabel.AutoSize = true;
+            this.DepartmentLabel.Location = new System.Drawing.Point(3, 0);
+            this.DepartmentLabel.Name = "DepartmentLabel";
+            this.DepartmentLabel.Size = new System.Drawing.Size(32, 13);
+            this.DepartmentLabel.TabIndex = 0;
+            this.DepartmentLabel.Text = "Dział";
+            // 
+            // OfficeLabel
+            // 
+            this.OfficeLabel.AutoSize = true;
+            this.OfficeLabel.Location = new System.Drawing.Point(3, 25);
+            this.OfficeLabel.Name = "OfficeLabel";
+            this.OfficeLabel.Size = new System.Drawing.Size(44, 13);
+            this.OfficeLabel.TabIndex = 1;
+            this.OfficeLabel.Text = "Oddział";
+            // 
+            // comboBox1
+            // 
+            this.comboBox1.FormattingEnabled = true;
+            this.comboBox1.Location = new System.Drawing.Point(114, 28);
+            this.comboBox1.Name = "comboBox1";
+            this.comboBox1.Size = new System.Drawing.Size(186, 21);
+            this.comboBox1.TabIndex = 2;
+            // 
+            // textBox3
+            // 
+            this.textBox3.Location = new System.Drawing.Point(114, 3);
+            this.textBox3.Name = "textBox3";
+            this.textBox3.Size = new System.Drawing.Size(188, 20);
+            this.textBox3.TabIndex = 3;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(784, 464);
+            this.Controls.Add(this.tableLayoutPanel3);
             this.Controls.Add(this.SaveBtn);
             this.Controls.Add(this.tableLayoutPanel1);
             this.Controls.Add(this.TurnOnEditBth);
@@ -248,9 +360,10 @@
             this.Controls.Add(this.OfficesBtn);
             this.Controls.Add(this.JobTitlesbtn);
             this.Controls.Add(this.EmployeesBtn);
+            this.Controls.Add(this.TurnOffEditBth);
+            this.Controls.Add(this.tableLayoutPanel2);
             this.Controls.Add(this.MainPicture);
             this.Controls.Add(this.SqldataGridView);
-            this.Controls.Add(this.TurnOffEditBth);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "Form1";
             this.Text = "Employees Managment";
@@ -259,6 +372,10 @@
             ((System.ComponentModel.ISupportInitialize)(this.SqldataGridView)).EndInit();
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel1.PerformLayout();
+            this.tableLayoutPanel2.ResumeLayout(false);
+            this.tableLayoutPanel2.PerformLayout();
+            this.tableLayoutPanel3.ResumeLayout(false);
+            this.tableLayoutPanel3.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -280,6 +397,16 @@
         private System.Windows.Forms.Label JobTitlesLabel;
         private System.Windows.Forms.TextBox TitlestextBox;
         private System.Windows.Forms.Button SaveBtn;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel2;
+        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TextBox textBox2;
+        private System.Windows.Forms.Label OfficeNameLabel;
+        private System.Windows.Forms.Label OfficeAdressLabel;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel3;
+        private System.Windows.Forms.Label DepartmentLabel;
+        private System.Windows.Forms.Label OfficeLabel;
+        private System.Windows.Forms.ComboBox comboBox1;
+        private System.Windows.Forms.TextBox textBox3;
     }
 }
 

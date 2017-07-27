@@ -36,6 +36,8 @@ namespace EmployessCRUD
             TurnOnEditBth.Hide();
             TurnOffEditBth.Hide();
             SaveBtn.Hide();
+            tableLayoutPanel2.Hide();
+            tableLayoutPanel3.Hide();
             
             SqldataGridView.ReadOnly = false;
         }
@@ -43,6 +45,10 @@ namespace EmployessCRUD
         private void EmployeesBtn_Click(object sender, EventArgs e)
         {
             Key = 1;
+            tableLayoutPanel3.Hide();
+            tableLayoutPanel2.Hide();
+            tableLayoutPanel1.Hide();
+            SaveBtn.Hide();
             JobTitlesbtn.Enabled = true;
             DepartmentsBtn.Enabled = true;
             OfficesBtn.Enabled = true;
@@ -84,7 +90,7 @@ namespace EmployessCRUD
             {
                 case 1: CreateEmployees(); break;
                 case 2: tableLayoutPanel1.Show(); SaveBtn.Show(); MessageBox.Show("Stanowiska"); break;
-                case 3: MessageBox.Show("Oddziały"); break;
+                case 3: tableLayoutPanel2.Show(); SaveBtn.Show(); MessageBox.Show("Oddziały"); break;
                 default: MessageBox.Show("Działy"); break;
             
             
@@ -243,6 +249,10 @@ namespace EmployessCRUD
         private void JobTitlesbtn_Click(object sender, EventArgs e)
         {
             Key = 2;
+            tableLayoutPanel3.Hide();
+            tableLayoutPanel2.Hide();
+            tableLayoutPanel1.Hide();
+            SaveBtn.Hide();
             EmployeesBtn.Enabled = true;
             OfficesBtn.Enabled = true;
             DepartmentsBtn.Enabled = true;
@@ -260,6 +270,10 @@ namespace EmployessCRUD
         private void OfficesBtn_Click(object sender, EventArgs e)
         {
             Key = 3;
+            tableLayoutPanel3.Hide();
+            tableLayoutPanel2.Hide();
+            tableLayoutPanel1.Hide();
+            SaveBtn.Hide();
             EmployeesBtn.Enabled = true;
             JobTitlesbtn.Enabled = true;
             DepartmentsBtn.Enabled = true;
@@ -278,6 +292,10 @@ namespace EmployessCRUD
         private void DepartmentsBtn_Click(object sender, EventArgs e)
         {
             Key = 4;
+            tableLayoutPanel3.Hide();
+            tableLayoutPanel2.Hide();
+            tableLayoutPanel1.Hide();
+            SaveBtn.Hide();
             EmployeesBtn.Enabled = true;
             JobTitlesbtn.Enabled = true;
             OfficesBtn.Enabled = true;
@@ -294,11 +312,11 @@ namespace EmployessCRUD
         }
 
         private void SaveBtn_Click(object sender, EventArgs e)
-        {
+        {   string text= "Wprowadzone słowo jest za krótkie" ;
             AddForm aform = new AddForm("");
             switch (Key)
             {
-                case 2: InsertToJobTitles(); LoadDataToSqldataGridView("Stanowiska","select id_stanowiska, nazwa as Stanowisko from STANOWISKA "); break;
+                case 2: if (TitlestextBox.Text.Length < 3) { MessageBox.Show(text); } else { InsertToJobTitles(); LoadDataToSqldataGridView("Stanowiska", "select id_stanowiska, nazwa as Stanowisko from STANOWISKA "); TitlestextBox.Text = ""; } break;
                 case 3: break;
                 default: break;
             
