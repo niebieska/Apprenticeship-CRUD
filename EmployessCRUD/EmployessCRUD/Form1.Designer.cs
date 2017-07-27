@@ -45,8 +45,8 @@
             this.TitlestextBox = new System.Windows.Forms.TextBox();
             this.SaveBtn = new System.Windows.Forms.Button();
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.textBox2 = new System.Windows.Forms.TextBox();
+            this.OfficeNametextBox = new System.Windows.Forms.TextBox();
+            this.OfficeAdresstextBox = new System.Windows.Forms.TextBox();
             this.OfficeNameLabel = new System.Windows.Forms.Label();
             this.OfficeAdressLabel = new System.Windows.Forms.Label();
             this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
@@ -250,8 +250,8 @@
             this.tableLayoutPanel2.ColumnCount = 2;
             this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 36.19632F));
             this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 63.80368F));
-            this.tableLayoutPanel2.Controls.Add(this.textBox1, 1, 0);
-            this.tableLayoutPanel2.Controls.Add(this.textBox2, 1, 1);
+            this.tableLayoutPanel2.Controls.Add(this.OfficeNametextBox, 1, 0);
+            this.tableLayoutPanel2.Controls.Add(this.OfficeAdresstextBox, 1, 1);
             this.tableLayoutPanel2.Controls.Add(this.OfficeNameLabel, 0, 0);
             this.tableLayoutPanel2.Controls.Add(this.OfficeAdressLabel, 0, 1);
             this.tableLayoutPanel2.Location = new System.Drawing.Point(422, 61);
@@ -262,19 +262,19 @@
             this.tableLayoutPanel2.Size = new System.Drawing.Size(308, 62);
             this.tableLayoutPanel2.TabIndex = 13;
             // 
-            // textBox1
+            // OfficeNametextBox
             // 
-            this.textBox1.Location = new System.Drawing.Point(114, 3);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(189, 20);
-            this.textBox1.TabIndex = 0;
+            this.OfficeNametextBox.Location = new System.Drawing.Point(114, 3);
+            this.OfficeNametextBox.Name = "OfficeNametextBox";
+            this.OfficeNametextBox.Size = new System.Drawing.Size(189, 20);
+            this.OfficeNametextBox.TabIndex = 0;
             // 
-            // textBox2
+            // OfficeAdresstextBox
             // 
-            this.textBox2.Location = new System.Drawing.Point(114, 34);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(189, 20);
-            this.textBox2.TabIndex = 1;
+            this.OfficeAdresstextBox.Location = new System.Drawing.Point(114, 34);
+            this.OfficeAdresstextBox.Name = "OfficeAdresstextBox";
+            this.OfficeAdresstextBox.Size = new System.Drawing.Size(189, 20);
+            this.OfficeAdresstextBox.TabIndex = 1;
             // 
             // OfficeNameLabel
             // 
@@ -349,9 +349,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(784, 464);
-            this.Controls.Add(this.tableLayoutPanel3);
             this.Controls.Add(this.SaveBtn);
-            this.Controls.Add(this.tableLayoutPanel1);
             this.Controls.Add(this.TurnOnEditBth);
             this.Controls.Add(this.DeleteBtn);
             this.Controls.Add(this.UpdateBtn);
@@ -361,9 +359,11 @@
             this.Controls.Add(this.JobTitlesbtn);
             this.Controls.Add(this.EmployeesBtn);
             this.Controls.Add(this.TurnOffEditBth);
+            this.Controls.Add(this.tableLayoutPanel1);
             this.Controls.Add(this.tableLayoutPanel2);
             this.Controls.Add(this.MainPicture);
             this.Controls.Add(this.SqldataGridView);
+            this.Controls.Add(this.tableLayoutPanel3);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "Form1";
             this.Text = "Employees Managment";
@@ -398,8 +398,8 @@
         private System.Windows.Forms.TextBox TitlestextBox;
         private System.Windows.Forms.Button SaveBtn;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel2;
-        private System.Windows.Forms.TextBox textBox1;
-        private System.Windows.Forms.TextBox textBox2;
+        private System.Windows.Forms.TextBox OfficeNametextBox;
+        private System.Windows.Forms.TextBox OfficeAdresstextBox;
         private System.Windows.Forms.Label OfficeNameLabel;
         private System.Windows.Forms.Label OfficeAdressLabel;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel3;

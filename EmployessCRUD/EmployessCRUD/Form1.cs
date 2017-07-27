@@ -317,7 +317,7 @@ namespace EmployessCRUD
             switch (Key)
             {
                 case 2: if (TitlestextBox.Text.Length < 3) { MessageBox.Show(text); } else { InsertToJobTitles(); LoadDataToSqldataGridView("Stanowiska", "select id_stanowiska, nazwa as Stanowisko from STANOWISKA "); TitlestextBox.Text = ""; } break;
-                case 3: break;
+                case 3: if (OfficeNametextBox.Text.Length < 3 || OfficeAdresstextBox.Text.Length < 3) { MessageBox.Show(text); } else { InsertIntoOffices(); LoadDataToSqldataGridView("Siedziby", "select id_siedziby as ID ,nazwa_siedziby as Oddział, adres as Adres from SIEDZIBY "); OfficeNametextBox.Text = ""; OfficeAdresstextBox.Text = ""; } break;
                 default: break;
             
             
@@ -352,7 +352,39 @@ namespace EmployessCRUD
         
         
         }
+        private void InsertIntoOffices()
+        {
+            AddForm aform = new AddForm("");
+            string instance = @"ELPLC-0305\SQLEXPRESS";
+            string dbdir = "Pracownicy";
+            string id = "sa";
+            string password = "Pr4ktyk4nt1!";
+            int ID = aform.CountData("SELECT  max (id_siedziby) as ilosc From SIEDZIBY;") + 1;
+
+            SqlConnection sqlConn = new SqlConnection("Data Source=" + instance + ";" + "User ID=" + id + ";" + "Password=" + password + ";" + "Initial Catalog=" + dbdir + ";");
+            try
+            {
+                sqlConn.Open();
+                SqlCommand cmd = new SqlCommand("insert into dbo.SIEDZIBY values (@id,@nazwa,@adres)", sqlConn);
+                cmd.Parameters.AddWithValue("@id", ID.ToString());
+                cmd.Parameters.AddWithValue("@nazwa", OfficeNametextBox.Text);
+                cmd.Parameters.AddWithValue("@adres", OfficeAdresstextBox.Text);
+                SqlDataReader rdr = cmd.ExecuteReader();
+                sqlConn.Close();
+            }
+            catch (System.Data.SqlClient.SqlException se)
+            {
+                MessageBox.Show("Nastąpil bląd połaczenia: " + se);
+                Console.ReadLine();
+            } 
         
+        
+        
+        
+        
+        
+        
+        }
 
     }
 }
