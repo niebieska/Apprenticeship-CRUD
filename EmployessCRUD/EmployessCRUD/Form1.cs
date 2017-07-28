@@ -25,7 +25,10 @@ namespace EmployessCRUD
         int[] IDs = new int[50]; //tablica z numerami ID pracowników;
         int[] IDj = new int[50];//tablica z indeksami ID stanowisk;
         int[] IDo = new int[50];
-        int i = 0,J=0,O=0;
+        int[] IDd = new int[50];
+        int OldDepartmentId;
+        
+        int i = 0,J=0,O=0,D=0;
  
         public Form1()
         {
@@ -226,13 +229,78 @@ namespace EmployessCRUD
             catch (System.Data.SqlClient.SqlException se)
             {
                 MessageBox.Show("Nastąpil bląd połaczenia: " + se);
+            }      
+        
+        
+        }
+        private void DepartmentId()
+        
+        {
+            string instance = @"ELPLC-0305\SQLEXPRESS";
+            string dbdir = "Pracownicy";
+            string id = "sa";
+            string password = "Pr4ktyk4nt1!";
+            SqlConnection sqlConn = new SqlConnection("Data Source=" + instance + ";" + "User ID=" + id + ";" + "Password=" + password + ";" + "Initial Catalog=" + dbdir + ";");
+
+            try
+            {
+                sqlConn.Open();
+                DateTime date = DateTime.Now;
+                Console.WriteLine("Połączono z bazą danych!");
+                SqlCommand cmd = new SqlCommand();
+                cmd.CommandText = "select id_dzialu from DZIALY";
+
+                cmd.Connection = sqlConn;
+                SqlDataReader rdr = cmd.ExecuteReader();
+
+                while (rdr.Read())
+                {
+                    IDd[D] = (int)rdr["id_dzialu"]; D++;
+
+                }
+                sqlConn.Close();
+                Console.ReadLine();
             }
+            catch (System.Data.SqlClient.SqlException se)
+            {
+                MessageBox.Show("Nastąpil bląd połaczenia: " + se);
+            }    
         
         
         
         }
         private void  Load_Departments()
         {
+            string instance = @"ELPLC-0305\SQLEXPRESS";
+            string dbdir = "Pracownicy";
+            string id = "sa";
+            string password = "Pr4ktyk4nt1!";
+            DepartmentId();
+            int index = IDd[SqldataGridView.SelectedRows[0].Index];
+            TitlestextBox.Text = IDd[SqldataGridView.SelectedRows[0].Index].ToString();
+
+
+            SqlConnection connection = new SqlConnection("Data Source=" + instance + ";" + "User ID=" + id + ";" + "Password=" + password + ";" + "Initial Catalog=" + dbdir + ";");
+
+            SqlCommand cmd = new SqlCommand("select d.nazwa_dzialu, s.nazwa_siedziby, s.id_siedziby  from DZIALY d join SIEDZIBY s on d.id_siedziby=s.id_siedziby where id_dzialu=" + index + ";", connection);
+            try
+            {
+                connection.Open();
+                SqlDataReader rdr = cmd.ExecuteReader();
+                while (rdr.Read())
+                {
+                    DepartmenttextBox.Text = (string)rdr["nazwa_dzialu"];
+                    OfficecomboBox.Text = (string)rdr["nazwa_siedziby"];
+                    OldDepartmentId=(int)rdr["id_siedziby"];
+
+                }
+                connection.Close();
+
+            }
+            catch (System.Data.SqlClient.SqlException se)
+            {
+                MessageBox.Show("Nastąpil bląd połaczenia: " + se);
+            }      
         
         
         
@@ -272,7 +340,31 @@ namespace EmployessCRUD
         
         }
         private void Update_Departments() 
-        { 
+        {
+            string instance = @"ELPLC-0305\SQLEXPRESS";
+            string dbdir = "Pracownicy";
+            string id = "sa";
+            string password = "Pr4ktyk4nt1!";
+            int ID = IDd[SqldataGridView.SelectedRows[0].Index];
+            int IDs;
+            if (this.OfficecomboBox.GetItemText(this.OfficecomboBox.SelectedItem)== "0") { IDs = OldDepartmentId; } else { IDs = FindOfficeId(); }
+
+            SqlConnection sqlConn = new SqlConnection("Data Source=" + instance + ";" + "User ID=" + id + ";" + "Password=" + password + ";" + "Initial Catalog=" + dbdir + ";");
+            try
+            {
+                sqlConn.Open();
+                SqlCommand cmd = new SqlCommand("Update dbo.DZIALY set nazwa_dzialu=@nazwa, id_siedziby=@ids where id_dzialu=@id", sqlConn);
+                cmd.Parameters.AddWithValue("@id", ID.ToString());
+                cmd.Parameters.AddWithValue("@nazwa", DepartmenttextBox.Text);
+                cmd.Parameters.AddWithValue("@ids", IDs);
+                SqlDataReader rdr = cmd.ExecuteReader();
+                sqlConn.Close();
+            }
+            catch (System.Data.SqlClient.SqlException se)
+            {
+                MessageBox.Show("Nastąpil bląd połaczenia: " + se);
+                Console.ReadLine();
+            } 
         
         
         
@@ -605,7 +697,11 @@ namespace EmployessCRUD
                             DepartmenttextBox.Text = "";
                             OfficecomboBox.Text = "";
                             } break;
-                          default: break;
+                          default: 
+                              Update_Departments();
+                              LoadDataToSqldataGridView("Dzialy", "select d.nazwa_dzialu, s.nazwa_siedziby, s.adres from DZIALY d join SIEDZIBY s on  d.id_siedziby=s.id_siedziby ");
+                              DepartmenttextBox.Text = "";
+                              OfficecomboBox.Text = ""; break;
                    
                         } break;
             }
@@ -713,7 +809,7 @@ namespace EmployessCRUD
                 SqlCommand cmd = new SqlCommand("insert into dbo.DZIALY values (@id,@nazwa,@ids)", sqlConn);
                 cmd.Parameters.AddWithValue("@id", ID.ToString());
                 cmd.Parameters.AddWithValue("@nazwa", DepartmenttextBox.Text);
-                cmd.Parameters.AddWithValue("@ids", FindDepartmentId().ToString());
+                cmd.Parameters.AddWithValue("@ids", FindOfficeId().ToString());
                 SqlDataReader rdr = cmd.ExecuteReader();
                 sqlConn.Close();
             }
@@ -724,7 +820,7 @@ namespace EmployessCRUD
             } 
          }
         
-        private int FindDepartmentId() 
+        private int FindOfficeId() 
         {
             int IDO = 0,O=0;
             while (O < 50)

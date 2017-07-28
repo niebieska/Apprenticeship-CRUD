@@ -252,8 +252,8 @@
             this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 63.80368F));
             this.tableLayoutPanel2.Controls.Add(this.OfficeNametextBox, 1, 0);
             this.tableLayoutPanel2.Controls.Add(this.OfficeAdresstextBox, 1, 1);
-            this.tableLayoutPanel2.Controls.Add(this.OfficeNameLabel, 0, 0);
             this.tableLayoutPanel2.Controls.Add(this.OfficeAdressLabel, 0, 1);
+            this.tableLayoutPanel2.Controls.Add(this.OfficeNameLabel, 0, 0);
             this.tableLayoutPanel2.Location = new System.Drawing.Point(422, 61);
             this.tableLayoutPanel2.Name = "tableLayoutPanel2";
             this.tableLayoutPanel2.RowCount = 2;
@@ -359,11 +359,11 @@
             this.Controls.Add(this.JobTitlesbtn);
             this.Controls.Add(this.EmployeesBtn);
             this.Controls.Add(this.TurnOffEditBth);
+            this.Controls.Add(this.tableLayoutPanel3);
             this.Controls.Add(this.tableLayoutPanel1);
             this.Controls.Add(this.tableLayoutPanel2);
             this.Controls.Add(this.MainPicture);
             this.Controls.Add(this.SqldataGridView);
-            this.Controls.Add(this.tableLayoutPanel3);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "Form1";
             this.Text = "Employees Managment";
