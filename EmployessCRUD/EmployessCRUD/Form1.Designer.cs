@@ -359,11 +359,11 @@
             this.Controls.Add(this.JobTitlesbtn);
             this.Controls.Add(this.EmployeesBtn);
             this.Controls.Add(this.TurnOffEditBth);
-            this.Controls.Add(this.tableLayoutPanel3);
             this.Controls.Add(this.tableLayoutPanel1);
             this.Controls.Add(this.tableLayoutPanel2);
             this.Controls.Add(this.MainPicture);
             this.Controls.Add(this.SqldataGridView);
+            this.Controls.Add(this.tableLayoutPanel3);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "Form1";
             this.Text = "Employees Managment";

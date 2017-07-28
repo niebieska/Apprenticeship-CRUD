@@ -16,13 +16,16 @@ namespace EmployessCRUD
         /*Deklaracje zmiennych globalnych*/
         bool IsClicked = false;
         int Key = 0;
+        char key;
         string[] Offices = new string[50];
         SqlDataAdapter dataadapter;
         SqlCommandBuilder databuilder;
         DataSet ds;
         DataTable sTable;
-        int[] IDs = new int[50]; //tablica z numerami ID pracowników
-        int i = 0;
+        int[] IDs = new int[50]; //tablica z numerami ID pracowników;
+        int[] IDj = new int[50];//tablica z indeksami ID stanowisk;
+        int[] IDo = new int[50];
+        int i = 0,J=0;
  
         public Form1()
         {
@@ -55,8 +58,11 @@ namespace EmployessCRUD
             OfficesBtn.Enabled = true;
             SqldataGridView.Show();
             CreateBtn.Show();
+            CreateBtn.Enabled = true;
             UpdateBtn.Show();
+            UpdateBtn.Enabled = false;
             DeleteBtn.Show();
+            DeleteBtn.Enabled = false;
             TurnOnEditBth.Show();
             MainPicture.Hide();
             string sql = "select p.id_pracownika as ID, p.imie as Imie, p.nazwisko as Nazwisko,  s.nazwa as Stanowisko, d.nazwa_dzialu as 'Nazwa działu', si.nazwa_siedziby as Siedziba, si.adres as Adres" +
@@ -87,32 +93,28 @@ namespace EmployessCRUD
 
         private void CreateBtn_Click(object sender, EventArgs e)
         {
+            key = 'c';
             switch (Key)
             {
                 case 1: CreateEmployees(); break;
                 case 2: tableLayoutPanel1.Show(); SaveBtn.Show(); MessageBox.Show("Stanowiska"); break;
                 case 3: tableLayoutPanel2.Show(); SaveBtn.Show(); MessageBox.Show("Oddziały"); break;
-                default: tableLayoutPanel3.Show(); SaveBtn.Show(); ComboBoxPreparation(); MessageBox.Show("Działy"); break;
-            
-            
+                default: tableLayoutPanel3.Show(); SaveBtn.Show(); ComboBoxPreparation(); MessageBox.Show("Działy"); break;               
             }
-
         }
 
         private void UpdateBtn_Click(object sender, EventArgs e)
         {
+            key = 'u';
             switch (Key) 
             {
-                case 1: Update_Employees(); break;
-                case 2: break;
-                case 3: break;
-                default: break;
+                case 1: Load_Employees();  break;
+                case 2: Load_JobTitles(); tableLayoutPanel1.Show(); SaveBtn.Show(); break;
+                case 3: Load_Offices(); tableLayoutPanel2.Show(); SaveBtn.Show(); break;
+                default: tableLayoutPanel3.Show(); SaveBtn.Show(); ComboBoxPreparation(); Load_Departments();  break;
             }
-            
-            
-            
         }
-        private void Update_Employees()
+        private void Load_Employees()
         {
             string sql = "select p.id_pracownika as ID, p.imie as Imie, p.nazwisko as Nazwisko,  s.nazwa as Stanowisko, d.nazwa_dzialu as 'Nazwa działu', si.nazwa_siedziby as Siedziba, si.adres as Adres" +
                          " from PRACOWNICY p join DZIALY d on p.id_dzialu=d.id_dzialu join STANOWISKA s on p.id_stanowiska=s.id_stanowiska join SIEDZIBY si on d.id_siedziby=si.id_siedziby;";
@@ -125,15 +127,117 @@ namespace EmployessCRUD
                 aform.ShowDialog();
             }
             LoadDataToSqldataGridView("Pracownicy", sql);
-       
         }
+        private void Load_JobTitles()
+        {
+            string instance = @"ELPLC-0305\SQLEXPRESS";
+            string dbdir = "Pracownicy";
+            string id = "sa";
+            string password = "Pr4ktyk4nt1!";
+            JobTitleID();
+            int index = IDj[SqldataGridView.SelectedRows[0].Index];
+            TitlestextBox.Text = IDj[SqldataGridView.SelectedRows[0].Index].ToString();
 
-        private void Update_Offices() { }
-        private void Update_Departments() { }
-        private void Update_JobTitles() { }
+
+            SqlConnection connection = new SqlConnection("Data Source=" + instance + ";" + "User ID=" + id + ";" + "Password=" + password + ";" + "Initial Catalog=" + dbdir + ";");
+
+            SqlCommand cmd = new SqlCommand("select nazwa from STANOWISKA where id_stanowiska=" + index + ";", connection);
+            try
+            {
+                connection.Open();
+                SqlDataReader rdr = cmd.ExecuteReader();
+                while (rdr.Read())
+                {
+                    TitlestextBox.Text = (string)rdr["nazwa"];
 
 
+                }
+                connection.Close();
 
+            }
+            catch (System.Data.SqlClient.SqlException se)
+            {
+                MessageBox.Show("Nastąpil bląd połaczenia: " + se);
+            }
+        
+        
+        }
+        private void Load_Offices(){}
+        private void  Load_Departments(){}
+
+        private void Update_Offices() 
+        { 
+        
+        
+        
+        }
+        private void Update_Departments() 
+        { 
+        
+        
+        
+        }
+        private void JobTitleID() 
+        {
+            string instance = @"ELPLC-0305\SQLEXPRESS";
+            string dbdir = "Pracownicy";
+            string id = "sa";
+            string password = "Pr4ktyk4nt1!";
+            SqlConnection sqlConn = new SqlConnection("Data Source=" + instance + ";" + "User ID=" + id + ";" + "Password=" + password + ";" + "Initial Catalog=" + dbdir + ";");
+
+            try
+            {
+                sqlConn.Open();
+                DateTime date = DateTime.Now;
+                Console.WriteLine("Połączono z bazą danych!");
+                SqlCommand cmd = new SqlCommand();
+                cmd.CommandText = "select id_stanowiska from STANOWISKA";
+
+                cmd.Connection = sqlConn;
+                SqlDataReader rdr = cmd.ExecuteReader();
+
+                while (rdr.Read())
+                {
+                    IDj[J] = (int)rdr["id_stanowiska"]; J++;
+
+                    
+                }
+                sqlConn.Close();
+                Console.ReadLine();
+            }
+            catch (System.Data.SqlClient.SqlException se)
+            {
+                MessageBox.Show("Nastąpil bląd połaczenia: " + se);
+            }        
+        
+        }
+        
+        private void Update_JobTitles() 
+        {
+            string instance = @"ELPLC-0305\SQLEXPRESS";
+            string dbdir = "Pracownicy";
+            string id = "sa";
+            string password = "Pr4ktyk4nt1!";
+            JobTitleID();
+            int ID = IDj[SqldataGridView.SelectedRows[0].Index];
+
+            SqlConnection sqlConn = new SqlConnection("Data Source=" + instance + ";" + "User ID=" + id + ";" + "Password=" + password + ";" + "Initial Catalog=" + dbdir + ";");
+
+            try
+            {
+                sqlConn.Open();
+                SqlCommand cmd = new SqlCommand("Update dbo.STANOWISKA set nazwa= @nazwa where id_stanowiska=@ID", sqlConn);
+                cmd.Parameters.AddWithValue("@ID", ID.ToString());
+                cmd.Parameters.AddWithValue("@nazwa", TitlestextBox.Text);
+
+                SqlDataReader rdr = cmd.ExecuteReader();
+            }
+            catch (System.Data.SqlClient.SqlException se)
+            {
+                MessageBox.Show("Nastąpil bląd połaczenia: " + se);
+            }
+        }
+        
         private void DeleteBtn_Click(object sender, EventArgs e)
         {
             if (IsClicked == false) { MessageBox.Show("Nie wybrano Pracownika !"); }
@@ -228,13 +332,10 @@ namespace EmployessCRUD
                    " from PRACOWNICY p join DZIALY d on p.id_dzialu=d.id_dzialu join STANOWISKA s on p.id_stanowiska=s.id_stanowiska join SIEDZIBY si on d.id_siedziby=si.id_siedziby;";
             aform.ShowDialog();
             LoadDataToSqldataGridView("Pracownicy", sql);
-            EmployeesBtn.Enabled = false;
-        
-        
+            EmployeesBtn.Enabled = false; 
         }
         private void Delete(int condition)
         {
-            //MessageBox.Show("Usuwanie");
             string instance = @"ELPLC-0305\SQLEXPRESS";
             string dbdir = "Pracownicy";
             string id = "sa";
@@ -243,17 +344,12 @@ namespace EmployessCRUD
 
             try
             {
-                //MessageBox.Show("Connected");
                 sqlConn.Open();
                 DateTime date = DateTime.Now;
                 Console.WriteLine("Połączono z bazą danych!");
-                               
-                //MessageBox.Show(condition.ToString());
                 SqlCommand cmd = new SqlCommand("DELETE FROM dbo.PRACOWNICY where id_pracownika='" + condition + "';", sqlConn);
-
                 SqlDataReader rdr = cmd.ExecuteReader();
-                sqlConn.Close();
-                //MessageBox.Show("finished");
+                sqlConn.Close();                
             }
 
             catch (System.Data.SqlClient.SqlException se)
@@ -281,6 +377,9 @@ namespace EmployessCRUD
             CreateBtn.Show();
             UpdateBtn.Show();
             DeleteBtn.Show();
+            CreateBtn.Enabled = true;
+            UpdateBtn.Enabled = false;
+            DeleteBtn.Enabled = false;
             TurnOnEditBth.Show();
             MainPicture.Hide();
             string sql = "select id_stanowiska, nazwa as Stanowisko from STANOWISKA ";
@@ -302,6 +401,9 @@ namespace EmployessCRUD
             CreateBtn.Show();
             UpdateBtn.Show();
             DeleteBtn.Show();
+            CreateBtn.Enabled = true;
+            UpdateBtn.Enabled = false;
+            DeleteBtn.Enabled = false;
             TurnOnEditBth.Show();
             MainPicture.Hide();
             string sql = "select id_siedziby as ID ,nazwa_siedziby as Oddział, adres as Adres from SIEDZIBY ";
@@ -324,6 +426,9 @@ namespace EmployessCRUD
             CreateBtn.Show();
             UpdateBtn.Show();
             DeleteBtn.Show();
+            CreateBtn.Enabled = true;
+            UpdateBtn.Enabled = false;
+            DeleteBtn.Enabled = false;
             TurnOnEditBth.Show();
             MainPicture.Hide();
             string sql = "select d.nazwa_dzialu, s.nazwa_siedziby, s.adres from DZIALY d join SIEDZIBY s on  d.id_siedziby=s.id_siedziby ";
@@ -334,32 +439,70 @@ namespace EmployessCRUD
 
         private void SaveBtn_Click(object sender, EventArgs e)
         {
-            string text = "Wprowadzone słowo jest za krótkie", text2 = "Nie wybrano biura dla tworzonego działu";
+            string text = "Wprowadzone  wyrażenie jest za krótkie", text2 = "Nie wybrano biura dla tworzonego działu";
             AddForm aform = new AddForm("");
             switch (Key)
             {
-                case 2: if (TitlestextBox.Text.Length < 3) { MessageBox.Show(text); } else { InsertToJobTitles(); LoadDataToSqldataGridView("Stanowiska", "select id_stanowiska, nazwa as Stanowisko from STANOWISKA "); TitlestextBox.Text = ""; } break;
-                case 3: if (OfficeNametextBox.Text.Length < 3 || OfficeAdresstextBox.Text.Length < 3) { MessageBox.Show(text); } else { InsertIntoOffices(); LoadDataToSqldataGridView("Siedziby", "select id_siedziby as ID ,nazwa_siedziby as Oddział, adres as Adres from SIEDZIBY "); OfficeNametextBox.Text = ""; OfficeAdresstextBox.Text = ""; } break;
-                default: 
-                    if (this.OfficecomboBox.GetItemText(this.OfficecomboBox.SelectedItem) == "0")
+                case 2: 
+                switch(key)
+                { 
+                    case 'c' :
+                        if (TitlestextBox.Text.Length <= 3) 
+                        {
+                            MessageBox.Show(text); 
+                        } 
+                        else 
+                        {
+                            InsertToJobTitles();
+                            LoadDataToSqldataGridView("Stanowiska", "select id_stanowiska, nazwa as Stanowisko from STANOWISKA "); 
+                            TitlestextBox.Text = ""; 
+                        } 
+                        break;
+                    default: Update_JobTitles(); LoadDataToSqldataGridView("Stanowiska", "select id_stanowiska, nazwa as Stanowisko from STANOWISKA ");
+                        TitlestextBox.Text = ""; 
+                        break;
+                }
+                break;
+                case 3:  
+                switch(key)
+                { 
+                    case 'c' :
+                    if (OfficeNametextBox.Text.Length < 3 || OfficeAdresstextBox.Text.Length < 3) 
                     {
-                        MessageBox.Show(text2); 
+                        MessageBox.Show(text); 
                     } 
                     else {
-                        if (DepartmenttextBox.Text.Length < 2)
-                        {
-                            MessageBox.Show(text);
-                        }
+                        InsertIntoOffices();
+                        LoadDataToSqldataGridView("Siedziby", "select id_siedziby as ID ,nazwa_siedziby as Oddział, adres as Adres from SIEDZIBY ");
+                        OfficeNametextBox.Text = ""; 
+                        OfficeAdresstextBox.Text = ""; 
+                    } 
+                    break;
+                    default:
+                        break;
+                }
+                break;
+                    default:
+                      switch(key)  {
+                          case 'c':
+                            if (this.OfficecomboBox.GetItemText(this.OfficecomboBox.SelectedItem) == "0")
+                            {
+                                MessageBox.Show(text2); 
+                            }
+                            else 
+                            {
+                                if (DepartmenttextBox.Text.Length < 2)
+                                {
+                                    MessageBox.Show(text);
+                                }                        
                             InsertIntoDepartments(); 
                             LoadDataToSqldataGridView("Dzialy", "select d.nazwa_dzialu, s.nazwa_siedziby, s.adres from DZIALY d join SIEDZIBY s on  d.id_siedziby=s.id_siedziby ");
                             DepartmenttextBox.Text = "";
                             OfficecomboBox.Text = "";
-                            
-                        
-                    } 
-                    break;
-            
-            
+                            } break;
+                          default: break;
+                   
+                        } break;
             }
         }
         private void InsertToJobTitles()
@@ -473,13 +616,9 @@ namespace EmployessCRUD
             {
                 MessageBox.Show("Nastąpil bląd połaczenia: " + se);
                 Console.ReadLine();
-            }  
-			
- 
+            } 
+         }
         
-        
-        
-        }
         private int FindDepartmentId() 
         {
             int IDO = 0,O=0;
@@ -491,7 +630,6 @@ namespace EmployessCRUD
                 }
                 O++;
             }
- 
 
             return IDO; 
         }
