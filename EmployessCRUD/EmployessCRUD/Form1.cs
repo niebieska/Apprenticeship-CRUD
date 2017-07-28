@@ -433,6 +433,18 @@ namespace EmployessCRUD
         
         private void DeleteBtn_Click(object sender, EventArgs e)
         {
+            switch (Key)
+            {case 1: PreparationForDelete();break;
+            case 2: Delete_JobTitles(); break;
+                case 3 :break;
+                default:break;
+            
+            
+            
+            }
+        }
+        private void PreparationForDelete()
+        {
             if (IsClicked == false) { MessageBox.Show("Nie wybrano Pracownika !"); }
             else
             {
@@ -446,12 +458,15 @@ namespace EmployessCRUD
                          " from PRACOWNICY p join DZIALY d on p.id_dzialu=d.id_dzialu join STANOWISKA s on p.id_stanowiska=s.id_stanowiska join SIEDZIBY si on d.id_siedziby=si.id_siedziby;";
                 switch (dr)
                 {
-                    case DialogResult.Yes: Delete(IDE);
+                    case DialogResult.Yes: Delete_Employees(IDE);
                         LoadDataToSqldataGridView("Pracownicy", sql); break;
                     case DialogResult.No: break;
                 }
             }
         }
+        
+        
+        
 
         private void LoadDataToSqldataGridView(string TableName, string sql) 
         {
@@ -527,7 +542,7 @@ namespace EmployessCRUD
             LoadDataToSqldataGridView("Pracownicy", sql);
             EmployeesBtn.Enabled = false; 
         }
-        private void Delete(int condition)
+        private void Delete_Employees(int condition)
         {
             string instance = @"ELPLC-0305\SQLEXPRESS";
             string dbdir = "Pracownicy";
@@ -792,7 +807,37 @@ namespace EmployessCRUD
                 MessageBox.Show("Nastąpil bląd połaczenia: " + se);
             }
         }
+        private bool IsNotAssigned(string sql)
+                {
+                    string instance = @"ELPLC-0305\SQLEXPRESS";
+                    string dbdir = "Pracownicy";
+                    string id = "sa";
+                    string password = "Pr4ktyk4nt1!";
 
+                    SqlConnection sqlConn = new SqlConnection("Data Source=" + instance + ";" + "User ID=" + id + ";" + "Password=" + password + ";" + "Initial Catalog=" + dbdir + ";");
+                    try
+                    {
+                        sqlConn.Open();
+                        SqlCommand cmd = new SqlCommand(sql, sqlConn);
+                        SqlDataReader rdr = cmd.ExecuteReader();
+
+                        while (rdr.Read())
+                        {
+                            if (rdr["ilosc"] == DBNull.Value) { return true; };
+                            int iloscrekordow = (int)rdr["ilosc"];
+                            return false;
+                        }
+                        sqlConn.Close();
+
+                    }
+
+                    catch (System.Data.SqlClient.SqlException se)
+                    {
+                        MessageBox.Show("Nastąpil bląd połaczenia: " + se);
+                        return false;
+                    }
+                    return false;  
+        } 
         private void InsertIntoDepartments() 
         {
             AddForm aform = new AddForm("");
@@ -819,6 +864,15 @@ namespace EmployessCRUD
                 Console.ReadLine();
             } 
          }
+
+        private void Delete_JobTitles() 
+        { string sql="select p.id_pracownika as ilosc from PRACOWNICY p  join STANOWISKA s on p.id_stanowiska=s.id_stanowiska where p.id_stanowiska"+ IDs[SqldataGridView.SelectedRows[0].Index] + ";";
+        if (IsNotAssigned(sql) == true) { MessageBox.Show("Można"); }
+        else { MessageBox.Show("Nie Można"); }
+        
+        
+        
+        }
         
         private int FindOfficeId() 
         {
