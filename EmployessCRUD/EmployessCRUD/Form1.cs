@@ -25,7 +25,7 @@ namespace EmployessCRUD
         int[] IDs = new int[50]; //tablica z numerami ID pracowników;
         int[] IDj = new int[50];//tablica z indeksami ID stanowisk;
         int[] IDo = new int[50];
-        int i = 0,J=0;
+        int i = 0,J=0,O=0;
  
         public Form1()
         {
@@ -162,11 +162,111 @@ namespace EmployessCRUD
         
         
         }
-        private void Load_Offices(){}
-        private void  Load_Departments(){}
+        private void OfficeID() 
+        {
+            string instance = @"ELPLC-0305\SQLEXPRESS";
+            string dbdir = "Pracownicy";
+            string id = "sa";
+            string password = "Pr4ktyk4nt1!";
+            SqlConnection sqlConn = new SqlConnection("Data Source=" + instance + ";" + "User ID=" + id + ";" + "Password=" + password + ";" + "Initial Catalog=" + dbdir + ";");
+
+            try
+            {
+                sqlConn.Open();
+                DateTime date = DateTime.Now;
+                Console.WriteLine("Połączono z bazą danych!");
+                SqlCommand cmd = new SqlCommand();
+                cmd.CommandText = "select id_siedziby from SIEDZIBY";
+
+                cmd.Connection = sqlConn;
+                SqlDataReader rdr = cmd.ExecuteReader();
+
+                while (rdr.Read())
+                {
+                    IDo[O] = (int)rdr["id_siedziby"]; O++;
+
+                }
+                sqlConn.Close();
+                Console.ReadLine();
+            }
+            catch (System.Data.SqlClient.SqlException se)
+            {
+                MessageBox.Show("Nastąpil bląd połaczenia: " + se);
+            }    
+        
+        }
+        private void Load_Offices()
+        {
+            string instance = @"ELPLC-0305\SQLEXPRESS";
+            string dbdir = "Pracownicy";
+            string id = "sa";
+            string password = "Pr4ktyk4nt1!";
+            OfficeID();
+            int index = IDo[SqldataGridView.SelectedRows[0].Index];
+            TitlestextBox.Text = IDo[SqldataGridView.SelectedRows[0].Index].ToString();
+
+
+            SqlConnection connection = new SqlConnection("Data Source=" + instance + ";" + "User ID=" + id + ";" + "Password=" + password + ";" + "Initial Catalog=" + dbdir + ";");
+
+            SqlCommand cmd = new SqlCommand("select nazwa_siedziby, adres from SIEDZIBY where id_siedziby=" + index + ";", connection);
+            try
+            {
+                connection.Open();
+                SqlDataReader rdr = cmd.ExecuteReader();
+                while (rdr.Read())
+                {
+                    OfficeNametextBox.Text = (string)rdr["nazwa_siedziby"];
+                    OfficeAdresstextBox.Text = (string)rdr["adres"];
+
+
+                }
+                connection.Close();
+
+            }
+            catch (System.Data.SqlClient.SqlException se)
+            {
+                MessageBox.Show("Nastąpil bląd połaczenia: " + se);
+            }
+        
+        
+        
+        }
+        private void  Load_Departments()
+        {
+        
+        
+        
+        
+        }
 
         private void Update_Offices() 
-        { 
+        {
+            string instance = @"ELPLC-0305\SQLEXPRESS";
+            string dbdir = "Pracownicy";
+            string id = "sa";
+            string password = "Pr4ktyk4nt1!";
+            OfficeID();
+            int ID = IDo[SqldataGridView.SelectedRows[0].Index];
+            MessageBox.Show(ID.ToString());
+            MessageBox.Show(OfficeNametextBox.Text);
+            MessageBox.Show(OfficeAdresstextBox.Text);
+            SqlConnection sqlConn = new SqlConnection("Data Source=" + instance + ";" + "User ID=" + id + ";" + "Password=" + password + ";" + "Initial Catalog=" + dbdir + ";");
+
+            try
+            {
+                sqlConn.Open();
+                SqlCommand cmd = new SqlCommand("Update dbo.SIEDZIBY set nazwa_siedziby= @nazwa, adres=@adres  where id_siedziby=@ID", sqlConn);
+                cmd.Parameters.AddWithValue("@ID", ID.ToString());
+                cmd.Parameters.AddWithValue("@nazwa", OfficeNametextBox.Text);
+                cmd.Parameters.AddWithValue("@adres", OfficeAdresstextBox.Text);
+
+                SqlDataReader rdr = cmd.ExecuteReader();
+                sqlConn.Close();
+            }
+            catch (System.Data.SqlClient.SqlException se)
+            {
+                MessageBox.Show("Nastąpil bląd połaczenia: " + se);
+            }
         
         
         
@@ -231,6 +331,7 @@ namespace EmployessCRUD
                 cmd.Parameters.AddWithValue("@nazwa", TitlestextBox.Text);
 
                 SqlDataReader rdr = cmd.ExecuteReader();
+                sqlConn.Close();
             }
             catch (System.Data.SqlClient.SqlException se)
             {
@@ -479,6 +580,10 @@ namespace EmployessCRUD
                     } 
                     break;
                     default:
+                    Update_Offices(); MessageBox.Show("jestem tu");
+                        LoadDataToSqldataGridView("Siedziby", "select id_siedziby as ID ,nazwa_siedziby as Oddział, adres as Adres from SIEDZIBY ");
+                        OfficeNametextBox.Text = "";
+                        OfficeAdresstextBox.Text = ""; 
                         break;
                 }
                 break;
